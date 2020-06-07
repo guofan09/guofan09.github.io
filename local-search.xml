@@ -4,11 +4,38 @@
   
   
   <entry>
-    <title>ip地址详解</title>
+    <title>系统部署</title>
     <link href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/"/>
     <url>/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/</url>
     
     <content type="html"><![CDATA[<h1 id="vm"><a href="#vm" class="headerlink" title="vm"></a>vm</h1><h1 id="部署windows-xp系统"><a href="#部署windows-xp系统" class="headerlink" title="部署windows-xp系统"></a>部署windows-xp系统</h1><h2 id="一-配置虚拟机硬件并安装系统"><a href="#一-配置虚拟机硬件并安装系统" class="headerlink" title="一 配置虚拟机硬件并安装系统"></a>一 配置虚拟机硬件并安装系统</h2><p>1、在VMware文件目录下创建一个空文件夹将其命名位：winxp-1</p><p>2、打开VMware软件，点击创建新的虚拟机。</p><p>3、我们安装的是Windows系统，这里选择<strong>典型。</strong></p><p>4、这里点<strong>稍后安装</strong></p><p>5、这个根据你下载的镜像资源来选择，我给大家的是xp profession(专业版)，默认32位，xp系统是比较老的系统了，点32位默认就可以了。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>网络安全</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>网络</tag>
+      
+      <tag>安全</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>ip地址详解</title>
+    <link href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A802/"/>
+    <url>/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A802/</url>
+    
+    <content type="html"><![CDATA[<h2 id="撒大苏打"><a href="#撒大苏打" class="headerlink" title="撒大苏打"></a>撒大苏打</h2><p>委撒旦撒旦撒啊啊啊撒旦撒旦sa</p><h2 id="阿三打撒打撒十大"><a href="#阿三打撒打撒十大" class="headerlink" title="阿三打撒打撒十大"></a>阿三打撒打撒十大</h2><p>法大师傅大师傅</p>]]></content>
     
     
     <categories>
