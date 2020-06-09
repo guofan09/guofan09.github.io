@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      33 字
+      569 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      6
        分钟
     </span>
   
@@ -224,8 +224,63 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="撒大苏打"><a href="#撒大苏打" class="headerlink" title="撒大苏打"></a>撒大苏打</h2><p>委撒旦撒旦撒啊啊啊撒旦撒旦sa</p>
-<h2 id="阿三打撒打撒十大"><a href="#阿三打撒打撒十大" class="headerlink" title="阿三打撒打撒十大"></a>阿三打撒打撒十大</h2><p>法大师傅大师傅</p>
+              <h2 id="局域网"><a href="#局域网" class="headerlink" title="局域网"></a>局域网</h2><p>局域网：一般称为内网</p>
+<p>单局域网构成：交换机，网线，pc</p>
+<p>交换机：用来组建内网的局域网的设备</p>
+<h2 id="ip地址"><a href="#ip地址" class="headerlink" title="ip地址"></a>ip地址</h2><p>定义：IP地址就是一个唯一标识 是一段网络编码</p>
+<p>32位二进制</p>
+<p>10进制： x.x.x.x x的范围 0-255</p>
+<h2 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h2><p>局域网通信规则：在同一个局域网中，所有IP必须在同一个网段中才可以互相通信</p>
+<p>IP构成：网络位 +主机位（网络位相同的IP地址，为同一个网段）</p>
+<p>子网掩码：用来确定IP地址的网络位</p>
+<p>子网掩码如何确定网络位： 与255对应的数字为网络位，与0对应的数字为主机位</p>
+<pre><code class="hljs accesslog">三个子网掩码：
+<span class="hljs-number">255.0.0.0</span>
+
+<span class="hljs-number">255.255.0.0</span>
+
+<span class="hljs-number">255.255.255.0</span></code></pre>
+
+<h2 id="IP地址详解"><a href="#IP地址详解" class="headerlink" title="IP地址详解"></a>IP地址详解</h2><p>ISO定义五大类：（是以IP地址的第一位进行区分的）</p>
+<p>A类：1-126 默认子网掩码：255.0.0.0</p>
+<p>B类：128-191 默认子网掩码：255.255.0.0</p>
+<p>C类：192-223 默认子网掩码：255.255.255.0</p>
+<p>D类：224-239 组播地址</p>
+<p>E类：240-254 科研使用</p>
+<pre><code class="hljs angelscript">注：目前我们只能使用A、B、C类 子网掩码可以修改
+每个网段的地址分三类：
+
+<span class="hljs-number">1</span>、<span class="hljs-number">0</span> 该网段的名称
+
+<span class="hljs-number">2</span>、<span class="hljs-number">255</span> 该网段的广播地址
+
+<span class="hljs-number">2</span>、中间的可用地址
+
+<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> 回环地址（跟自己通信）
+
+网关</code></pre>
+
+<p><strong>举例：IP地址 ：10.1.1.1  子网掩码：255.255.255.0</strong></p>
+<p>​           <strong>该IP地址的网段  完整为 10.1.1.0    即10.1.1.0不能作为IP地址 主机位不能够为0</strong></p>
+<p>​           <strong>该网段有多少地址？理论上除了0 还有255个 但是实际上只有254个 最后一个255作为主机位</strong></p>
+<p>​           <strong>最后一位如果是255 作为广播地址</strong>      </p>
+<p><font color=red> 主机位不能全为0 也不能全为255</font></p>
+<h3 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h3><p>网关：一个网络的出口，Gateway=GW，一般网关在路由器上</p>
+<p>路由器：可以连接外网的设备</p>
+<pre><code class="hljs angelscript">pc向外发包
+
+<span class="hljs-number">1</span>、首先判断目标IP与自己是否在 同一个网段
+
+<span class="hljs-number">2</span>、如在同一个网段，则直接发出去，不找网关
+
+<span class="hljs-number">3</span>、如不在同一个网段，则发包给网关</code></pre>
+
+
+
+
+
+
+
 
             </article>
             <hr>
@@ -258,15 +313,15 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">系统部署</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
+                    
+                      <a href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/">
+                        <span class="hidden-mobile">系统部署</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </div>
                 </div>
