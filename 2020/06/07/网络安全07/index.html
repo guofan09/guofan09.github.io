@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>网络安全08 - 浮生一梦</title>
+  <title>服务器远程管理 - 浮生一梦</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -151,7 +151,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/021.jpg') no-repeat center center;
+         style="background: url('/img/07.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-06-17 22:26">
-      June 17, 2020 pm
+    <time datetime="2020-06-07 11:43">
+      June 7, 2020 am
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      750 字
+      397 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      4
        分钟
     </span>
   
@@ -224,48 +224,49 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <pre><code class="hljs subunit">title:八 破解windows系统密码
-date: 2020<span class="hljs-string">-06</span><span class="hljs-string">-07</span> 11:43:09
-index_img: /img/01.jpg
-banner_img: /img/07.jpg
-categories:
-- 网络安全
-<span class="hljs-keyword">tags:</span>
-- 网络
-- 安全</code></pre>
+              <h2 id="一、远程管理类型"><a href="#一、远程管理类型" class="headerlink" title="一、远程管理类型"></a><strong>一、远程管理类型</strong></h2><p>windows远程管理有2种类型：</p>
+<p>1、远程桌面（图形）  //只要可以ping通 就可以远程管理</p>
+<p>2、telnet（命令行）</p>
+<h2 id="二、远程桌面"><a href="#二、远程桌面" class="headerlink" title="二、远程桌面"></a><strong>二、远程桌面</strong></h2><p>拓扑图</p>
+<p><img src="/wenzhang/Netimg/03.png" srcset="/img/loading.gif" alt=""></p>
+<pre><code class="hljs angelscript">步骤： <span class="hljs-number">1</span>、首先将配置网络，并实现客户机与服务器可以互通。 
+      <span class="hljs-number">2</span>、服务器开启允许被远程控制：桌面右键属性 -- 远程设置 -- 选择允许 -- 确定。 
+      <span class="hljs-number">3</span>、客户机上：开始 -- 运行 -- 输入mstsc 打开远程连接工具。 
+      <span class="hljs-number">4</span>、在mstsc工具上输入服务器的IP并点击确定。 
+      <span class="hljs-number">5</span>、输入服务器的账号及密码。 注意：如使用非管理员账户登录远程，需要在服务器上将用户加入到远程桌面内置          组Remote Desktop Users中。</code></pre>
 
-<h2 id="一、利用5次shift漏洞破解win7密码"><a href="#一、利用5次shift漏洞破解win7密码" class="headerlink" title="一、利用5次shift漏洞破解win7密码"></a><strong>一、利用5次shift漏洞破解win7密码</strong></h2><h3 id="1-1-漏洞"><a href="#1-1-漏洞" class="headerlink" title="1.1 漏洞"></a><strong>1.1</strong> <strong>漏洞</strong></h3><pre><code class="hljs angelscript"><span class="hljs-number">1</span>、在未登录系统时，连续按<span class="hljs-number">5</span>次shift键，弹出程序c:\windows\system32\sethc.exe 
-<span class="hljs-number">2</span>、部分win7及win10系统在未进入系统时，可以通过系统修复漏洞篡改系统文件名！ 注：如win7或win10系统已修补漏洞<span class="hljs-number">2</span>，则无法利用</code></pre>
+<h2 id="三、-telnet"><a href="#三、-telnet" class="headerlink" title="三、**telnet**"></a><strong>三、**</strong>telnet**</h2><p><img src="/wenzhang/Netimg/03.png" srcset="/img/loading.gif" alt=""></p>
+<pre><code class="hljs angelscript">步骤： <span class="hljs-number">1</span>、首先将配置网络，并实现客户机与服务器可以互通。 
+      <span class="hljs-number">2</span>、服务器开启允许被telnet远程控制：开始 -- 运行 -- 输入services.msc，并开启telnet服务。 
+      <span class="hljs-number">3</span>、客户机上：开始 -- 运行 -- 输入cmd。 
+      <span class="hljs-number">4</span>、在命令行窗口中输入：telnet <span class="hljs-number">10.1</span><span class="hljs-number">.1</span><span class="hljs-number">.2</span>。
+      <span class="hljs-number">5</span>、输入服务器的账号及密码。 注意：如服务器是<span class="hljs-number">2008</span>及更高版本系统，需要再第二步前先按照telnet服务：计          算机右键管理 -- 功能 -- 按照 telnet 服务，另外如使用非管理员账户登录远程，需要再服务器上将用          户加入到远程桌面内置组中。</code></pre>
 
-<h3 id="1-2-破解过程相关知识"><a href="#1-2-破解过程相关知识" class="headerlink" title="1.2 破解过程相关知识"></a><strong>1.2</strong> <strong>破解过程相关知识</strong></h3><pre><code class="hljs routeros">1、cmd工具路径 c:\windows\system32\cmd 
-2、用户/账户密码存储位置 c:\windows\system32\config\SAM # 非逆转型加密、使用hash值类似的方法、MD5 SHA 
-3、修改账户密码： net<span class="hljs-built_in"> user </span>用户名 新密码</code></pre>
-
-<h3 id="1-3-漏洞利用过程"><a href="#1-3-漏洞利用过程" class="headerlink" title="1.3 漏洞利用过程"></a><strong>1.3</strong> <strong>漏洞利用过程</strong></h3><pre><code class="hljs angelscript">案例：破解win7系统密码 实验步骤： 
-<span class="hljs-number">1</span>、开启win7虚拟机，开机，并设置一个复杂密码； 
-<span class="hljs-number">2</span>、关机，并开机，在出现windows启动界面时强制关机； 
-<span class="hljs-number">3</span>、再开机，出现“启动修复（推荐）”及选择该项； # 如为出现，多尝试几次第<span class="hljs-number">2</span>步，如还不行，请换其他方法 
-<span class="hljs-number">4</span>、出现系统还原提示，点击取消，等待几分钟后，会出现问题原因，点击查看详细信息； 
-<span class="hljs-number">5</span>、打开最后一个链接即一个记事本； 
-<span class="hljs-number">6</span>、记事本中点打开，并选择显示所有文件； 
-<span class="hljs-number">7</span>、找到sethc并改名sethc-bak，再找到cmd，复制一份cmd改名为sethc 
-<span class="hljs-number">8</span>、全部关闭，重启。 
-<span class="hljs-number">9</span>、系统启动完毕后，连续按<span class="hljs-number">5</span>次shift键，将弹出cmd工具，使用命令net user 用户名 新密码，将当前用户密码修 改掉即可，或者另外建立<span class="hljs-number">1</span>个用户，并提升为管理员，注销后，可再删除新建的用户，这样的好处为不修改当前用户的密 码即可登录系统。</code></pre>
-
-<h2 id="二、利用PE系统破解XP密码"><a href="#二、利用PE系统破解XP密码" class="headerlink" title="二、利用PE系统破解XP密码"></a><strong>二、利用PE系统破解XP密码</strong></h2><h3 id="2-1-漏洞"><a href="#2-1-漏洞" class="headerlink" title="2.1 漏洞"></a><strong>2.1</strong> <strong>漏洞</strong></h3><pre><code class="hljs plain">PE系统，独立于硬盘系统的微型系统，通过PE系统启动可以对系统的SAM文件做修改</code></pre>
-
-<h3 id="2-2-破解过程相关知识"><a href="#2-2-破解过程相关知识" class="headerlink" title="2.2 破解过程相关知识"></a><strong>2.2</strong> <strong>破解过程相关知识</strong></h3><pre><code class="hljs taggerscript">账户密码存储文件：c:<span class="hljs-symbol">\w</span>indows<span class="hljs-symbol">\s</span>ystem32<span class="hljs-symbol">\c</span>onfig<span class="hljs-symbol">\S</span>AM U盘引导系统：开机修改启动顺序，并将U盘设置为第一启动顺序！（一般电脑是开机马上按F2键，进入BIOS，修改启动 顺序，不同品牌电脑设置方法不一样，可咨询售后）</code></pre>
-
-<h3 id="2-3-漏洞利用过程"><a href="#2-3-漏洞利用过程" class="headerlink" title="2.3 漏洞利用过程"></a><strong>2.3</strong> <strong>漏洞利用过程</strong></h3><pre><code class="hljs angelscript"><span class="hljs-number">1.</span>下载PE制作工具（如老毛桃，大白菜，深度等），插入空U盘或光盘，一键制作PE系统到U盘 
-<span class="hljs-number">2.</span>为XP系统设置一个复杂密码，并关机。 
-<span class="hljs-number">3.</span>插入带有PE系统的U盘或光盘，开机，马上按F2，进入BIOS，设置启动顺序为U盘或光盘为第一位，保存 <span class="hljs-number">4.</span>重启，进入PE菜单或PE系统，使用破解密码程序进行破解。（不同的PE系统菜单不一样，但一般都有破解密码选项）</code></pre>
-
+<p>netstat -an 查看本地所有开放的端口号</p>
+<p>TCP 0.0.0.0:3389 远程桌面协议RDP</p>
+<p>​         0.0.0.0:23 tenlet 端口号</p>
 
             </article>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
+                    
+                  </div>
                 
               </div>
               
@@ -276,12 +277,18 @@ categories:
                   <div class="post-prev col-6">
                     
                     
+                      <a href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">系统部署</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/06/17/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A807/">
-                        <span class="hidden-mobile">网络安全07</span>
+                      <a href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A808/">
+                        <span class="hidden-mobile">破解系统漏洞</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -446,7 +453,7 @@ categories:
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "网络安全08&nbsp;",
+        "服务器远程管理&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
