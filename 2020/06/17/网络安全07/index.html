@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>系统部署 - 浮生一梦</title>
+  <title>网络安全07 - 浮生一梦</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -151,7 +151,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/07.jpg') no-repeat center center;
+         style="background: url('/img/021.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-06-07 11:43">
-      June 7, 2020 am
+    <time datetime="2020-06-17 20:25">
+      June 17, 2020 pm
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      132 字
+      431 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      4
        分钟
     </span>
   
@@ -224,33 +224,43 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="vm"><a href="#vm" class="headerlink" title="vm"></a>vm</h1><h1 id="部署windows-xp系统"><a href="#部署windows-xp系统" class="headerlink" title="部署windows-xp系统"></a>部署windows-xp系统</h1><h2 id="一-配置虚拟机硬件并安装系统"><a href="#一-配置虚拟机硬件并安装系统" class="headerlink" title="一 配置虚拟机硬件并安装系统"></a>一 配置虚拟机硬件并安装系统</h2><p>1、在VMware文件目录下创建一个空文件夹将其命名位：winxp-1</p>
-<p>2、打开VMware软件，点击创建新的虚拟机。</p>
-<p>3、我们安装的是Windows系统，这里选择<strong>典型。</strong></p>
-<p>4、这里点<strong>稍后安装</strong></p>
-<p>5、这个根据你下载的镜像资源来选择，我给大家的是xp profession(专业版)，默认32位，xp系统是比较老的系统了，点32位默认就可以了。</p>
+              <pre><code class="hljs subunit">title: 七 服务器远程管理
+date: 2020<span class="hljs-string">-06</span><span class="hljs-string">-07</span> 11:43:09
+index_img: /img/08.jpg
+banner_img: /img/07.jpg
+categories:
+- 网络安全
+<span class="hljs-keyword">tags:</span>
+- 网络
+- 安全</code></pre>
+
+<h2 id="一、远程管理类型"><a href="#一、远程管理类型" class="headerlink" title="一、远程管理类型"></a><strong>一、远程管理类型</strong></h2><p>windows远程管理有2种类型：</p>
+<p>1、远程桌面（图形）  //只要可以ping通 就可以远程管理</p>
+<p>2、telnet（命令行）</p>
+<h2 id="二、远程桌面"><a href="#二、远程桌面" class="headerlink" title="二、远程桌面"></a><strong>二、远程桌面</strong></h2><p>拓扑图</p>
+<p><img src="/wenzhang/Netimg/03.png" srcset="/img/loading.gif" alt=""></p>
+<pre><code class="hljs angelscript">步骤： <span class="hljs-number">1</span>、首先将配置网络，并实现客户机与服务器可以互通。 
+      <span class="hljs-number">2</span>、服务器开启允许被远程控制：桌面右键属性 -- 远程设置 -- 选择允许 -- 确定。 
+      <span class="hljs-number">3</span>、客户机上：开始 -- 运行 -- 输入mstsc 打开远程连接工具。 
+      <span class="hljs-number">4</span>、在mstsc工具上输入服务器的IP并点击确定。 
+      <span class="hljs-number">5</span>、输入服务器的账号及密码。 注意：如使用非管理员账户登录远程，需要在服务器上将用户加入到远程桌面内置          组Remote Desktop Users中。</code></pre>
+
+<h2 id="三、-telnet"><a href="#三、-telnet" class="headerlink" title="三、**telnet**"></a><strong>三、**</strong>telnet**</h2><p><img src="/wenzhang/Netimg/03.png" srcset="/img/loading.gif" alt=""></p>
+<pre><code class="hljs angelscript">步骤： <span class="hljs-number">1</span>、首先将配置网络，并实现客户机与服务器可以互通。 
+      <span class="hljs-number">2</span>、服务器开启允许被telnet远程控制：开始 -- 运行 -- 输入services.msc，并开启telnet服务。 
+      <span class="hljs-number">3</span>、客户机上：开始 -- 运行 -- 输入cmd。 
+      <span class="hljs-number">4</span>、在命令行窗口中输入：telnet <span class="hljs-number">10.1</span><span class="hljs-number">.1</span><span class="hljs-number">.2</span>。
+      <span class="hljs-number">5</span>、输入服务器的账号及密码。 注意：如服务器是<span class="hljs-number">2008</span>及更高版本系统，需要再第二步前先按照telnet服务：计          算机右键管理 -- 功能 -- 按照 telnet 服务，另外如使用非管理员账户登录远程，需要再服务器上将用          户加入到远程桌面内置组中。</code></pre>
+
+<p>netstat -an 查看本地所有开放的端口号</p>
+<p>TCP 0.0.0.0:3389 远程桌面协议RDP</p>
+<p>​         0.0.0.0:23 tenlet 端口号</p>
 
             </article>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
-                    
-                  </div>
                 
               </div>
               
@@ -261,9 +271,9 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/06/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A806/">
+                      <a href="/2020/06/17/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A808/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">网络安全06</span>
+                        <span class="hidden-mobile">网络安全08</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -271,8 +281,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A802/">
-                        <span class="hidden-mobile">ip地址详解</span>
+                      <a href="/2020/06/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A806/">
+                        <span class="hidden-mobile">网络安全06</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -437,7 +447,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "系统部署&nbsp;",
+        "网络安全07&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

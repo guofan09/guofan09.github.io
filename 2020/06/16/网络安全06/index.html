@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>系统部署 - 浮生一梦</title>
+  <title>网络安全06 - 浮生一梦</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -151,7 +151,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/07.jpg') no-repeat center center;
+         style="background: url('/img/021.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-06-07 11:43">
-      June 7, 2020 am
+    <time datetime="2020-06-16 20:51">
+      June 16, 2020 pm
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      132 字
+      767 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      9
        分钟
     </span>
   
@@ -224,33 +224,87 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="vm"><a href="#vm" class="headerlink" title="vm"></a>vm</h1><h1 id="部署windows-xp系统"><a href="#部署windows-xp系统" class="headerlink" title="部署windows-xp系统"></a>部署windows-xp系统</h1><h2 id="一-配置虚拟机硬件并安装系统"><a href="#一-配置虚拟机硬件并安装系统" class="headerlink" title="一 配置虚拟机硬件并安装系统"></a>一 配置虚拟机硬件并安装系统</h2><p>1、在VMware文件目录下创建一个空文件夹将其命名位：winxp-1</p>
-<p>2、打开VMware软件，点击创建新的虚拟机。</p>
-<p>3、我们安装的是Windows系统，这里选择<strong>典型。</strong></p>
-<p>4、这里点<strong>稍后安装</strong></p>
-<p>5、这个根据你下载的镜像资源来选择，我给大家的是xp profession(专业版)，默认32位，xp系统是比较老的系统了，点32位默认就可以了。</p>
+              <pre><code class="hljs subunit">title: 用户与组管理
+date: 2020<span class="hljs-string">-06</span><span class="hljs-string">-07</span> 11:43:09
+index_img: /img/09.jpg
+banner_img: /img/07.jpg
+categories:
+- 网络安全
+<span class="hljs-keyword">tags:</span>
+- 网络
+- 安全</code></pre>
+
+<p><strong>一、服务器系统版本介绍</strong></p>
+<p>windows服务器系统：win2000 win2003 win2008 win2012</p>
+<p>linux服务器系统：Redhat Centos</p>
+<p><strong>二、用户管理</strong></p>
+<p><strong>1.1</strong> <strong>用户概述</strong></p>
+<p>每一个用户登录系统后，拥有不同的操作权限。</p>
+<p>每个账户有自己唯一的SID（安全标识符）</p>
+<p>用户SID：S-1-5-21-426206823-2579496042-14852678-500</p>
+<p>系统SID：S-1-5-21-426206823-2579496042-14852678</p>
+<pre><code class="hljs angelscript">用户UID：<span class="hljs-number">500</span> 
+windows系统管理员administrator的UID是<span class="hljs-number">500</span> 
+普通用户的UID是<span class="hljs-number">1000</span>开始</code></pre>
+
+<p>不同的账户拥有不同的权限，为不同的账户赋权限，也就是为不用账户的SID赋权限！</p>
+<p>查看sid值：whoami /user</p>
+<p>账户密码存储位置：c:\windows\system32\confifig\SAM #暴力破解/撞库</p>
+<p>windows系统上，默认密码最长有效期42天</p>
+<p><strong>1.2</strong> <strong>内置账户</strong></p>
+<p>给人使用的账户：</p>
+<p>administrator #管理员账户</p>
+<p>guest #来宾账户</p>
+<p>计算机服务组件相关的系统账号</p>
+<p>system #系统账户 == 权限至高无上</p>
+<p>local services #本地服务账户 == 权限等于普通用户</p>
+<p>network services #网络服务账户 == 权限等于普通用户</p>
+<p><strong>1.3</strong> <strong>配置文件</strong></p>
+<p>每个用户都有自己的配置文件（家目录），在用户第一次登录时自动产生，路径是：</p>
+<p>win7/win2008 c:\用户\ </p>
+<p>• 用户UID：500 </p>
+<p>• windows系统管理员administrator的UID是500 </p>
+<p>• 普通用户的UID是1000开始xp/win2003 c:\Documents and Settings\</p>
+<p><strong>1.4</strong> <strong>用户管理命令</strong></p>
+<pre><code class="hljs routeros">net<span class="hljs-built_in"> user </span>#查看用户列表
+net<span class="hljs-built_in"> user </span>用户名 密码 #改密码
+net<span class="hljs-built_in"> user </span>用户名 密码 /<span class="hljs-builtin-name">add</span> #创建一个新用户 
+net<span class="hljs-built_in"> user </span>用户名 /del #删除一个用户
+net<span class="hljs-built_in"> user </span>用户名 /active:yes/<span class="hljs-literal">no</span> #激活或禁用账户 
+练习： 1、练习图形及命令行中，进行用户管理（包括创建、修改密码、删除用户、登录并验证家目录产生、及权限） 2、制作一个批处理脚本，可以实现互动创建用户</code></pre>
+
+<p><strong>三、组管理</strong></p>
+<p><strong>3.1</strong> <strong>组概述</strong></p>
+<p>组的作用：简化权限的赋予。</p>
+<p>赋权限方式：</p>
+<p> 1）用户—组—赋权限·</p>
+<p> 2）用户—赋权限</p>
+<p><strong>3.2</strong> <strong>内置组</strong></p>
+<p>内置组的权限默认已经被系统赋予。</p>
+<pre><code class="hljs yaml"><span class="hljs-number">1</span><span class="hljs-string">）administrators</span> <span class="hljs-comment"># 管理员组 </span>
+<span class="hljs-number">2</span><span class="hljs-string">）guests</span>         <span class="hljs-comment"># 来宾组 </span>
+<span class="hljs-number">3</span><span class="hljs-string">）users</span>          <span class="hljs-comment"># 普通用户组，默认新建用户都属于该组</span>
+<span class="hljs-number">4</span><span class="hljs-string">）network</span>        <span class="hljs-comment"># 网络配置组 </span>
+<span class="hljs-number">5</span><span class="hljs-string">）print</span>          <span class="hljs-comment"># 打印机组 </span>
+<span class="hljs-number">6</span><span class="hljs-string">）Remote</span> <span class="hljs-string">Desktop</span> <span class="hljs-comment"># 远程桌面组</span></code></pre>
+
+<p><strong>3.3</strong> <strong>组管理命令</strong></p>
+<pre><code class="hljs dockerfile">net localgroup <span class="hljs-comment"># 查看组列表 </span>
+net localgroup 组名 <span class="hljs-comment"># 查看该组的成员 </span>
+net localgroup 组名 /<span class="hljs-keyword">add</span><span class="bash"> <span class="hljs-comment"># 创建一个新的组 </span></span>
+net localgroup 组名 用户名 /<span class="hljs-keyword">add</span><span class="bash"> <span class="hljs-comment"># 添加用户到组</span></span>
+net localgroup 组名 用户名 /del <span class="hljs-comment"># 从组中踢出用户 </span>
+net localgroup 组名 /del <span class="hljs-comment"># 删除组 </span>
+练习： <span class="hljs-number">1</span>、练习图形及命令行中，进行组管理（创建组、组成员添加、查看组成员、成员脱离组、删除组） <span class="hljs-number">2</span>、创建<span class="hljs-number">1</span>个普通用户lisi，并将lisi提升为管理员，并验证lisi是否成功取得管理员权限！</code></pre>
+
+<p><strong>四、服务管理</strong></p>
+<p>开始 – 运行 – services.msc</p>
 
             </article>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
-                    
-                  </div>
                 
               </div>
               
@@ -261,9 +315,9 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/06/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A806/">
+                      <a href="/2020/06/17/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A807/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">网络安全06</span>
+                        <span class="hidden-mobile">网络安全07</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -271,8 +325,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A802/">
-                        <span class="hidden-mobile">ip地址详解</span>
+                      <a href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/">
+                        <span class="hidden-mobile">系统部署</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -437,7 +491,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "系统部署&nbsp;",
+        "网络安全06&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
