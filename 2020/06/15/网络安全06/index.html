@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>服务器远程管理 - 浮生一梦</title>
+  <title>用户与组管理 - 浮生一梦</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-06-07 11:43">
-      June 7, 2020 am
+    <time datetime="2020-06-15 11:43">
+      June 15, 2020 am
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      397 字
+      735 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      8
        分钟
     </span>
   
@@ -224,27 +224,71 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="一、远程管理类型"><a href="#一、远程管理类型" class="headerlink" title="一、远程管理类型"></a><strong>一、远程管理类型</strong></h2><p>windows远程管理有2种类型：</p>
-<p>1、远程桌面（图形）  //只要可以ping通 就可以远程管理</p>
-<p>2、telnet（命令行）</p>
-<h2 id="二、远程桌面"><a href="#二、远程桌面" class="headerlink" title="二、远程桌面"></a><strong>二、远程桌面</strong></h2><p>拓扑图</p>
-<p><img src="/wenzhang/Netimg/03.png" srcset="/img/loading.gif" alt=""></p>
-<pre><code class="hljs angelscript">步骤： <span class="hljs-number">1</span>、首先将配置网络，并实现客户机与服务器可以互通。 
-      <span class="hljs-number">2</span>、服务器开启允许被远程控制：桌面右键属性 -- 远程设置 -- 选择允许 -- 确定。 
-      <span class="hljs-number">3</span>、客户机上：开始 -- 运行 -- 输入mstsc 打开远程连接工具。 
-      <span class="hljs-number">4</span>、在mstsc工具上输入服务器的IP并点击确定。 
-      <span class="hljs-number">5</span>、输入服务器的账号及密码。 注意：如使用非管理员账户登录远程，需要在服务器上将用户加入到远程桌面内置          组Remote Desktop Users中。</code></pre>
+              <p><strong>一、服务器系统版本介绍</strong></p>
+<p>windows服务器系统：win2000 win2003 win2008 win2012</p>
+<p>linux服务器系统：Redhat Centos</p>
+<p><strong>二、用户管理</strong></p>
+<p><strong>1.1</strong> <strong>用户概述</strong></p>
+<p>每一个用户登录系统后，拥有不同的操作权限。</p>
+<p>每个账户有自己唯一的SID（安全标识符）</p>
+<p>用户SID：S-1-5-21-426206823-2579496042-14852678-500</p>
+<p>系统SID：S-1-5-21-426206823-2579496042-14852678</p>
+<pre><code class="hljs angelscript">用户UID：<span class="hljs-number">500</span> 
+windows系统管理员administrator的UID是<span class="hljs-number">500</span> 
+普通用户的UID是<span class="hljs-number">1000</span>开始</code></pre>
 
-<h2 id="三、-telnet"><a href="#三、-telnet" class="headerlink" title="三、**telnet**"></a><strong>三、**</strong>telnet**</h2><p><img src="/wenzhang/Netimg/03.png" srcset="/img/loading.gif" alt=""></p>
-<pre><code class="hljs angelscript">步骤： <span class="hljs-number">1</span>、首先将配置网络，并实现客户机与服务器可以互通。 
-      <span class="hljs-number">2</span>、服务器开启允许被telnet远程控制：开始 -- 运行 -- 输入services.msc，并开启telnet服务。 
-      <span class="hljs-number">3</span>、客户机上：开始 -- 运行 -- 输入cmd。 
-      <span class="hljs-number">4</span>、在命令行窗口中输入：telnet <span class="hljs-number">10.1</span><span class="hljs-number">.1</span><span class="hljs-number">.2</span>。
-      <span class="hljs-number">5</span>、输入服务器的账号及密码。 注意：如服务器是<span class="hljs-number">2008</span>及更高版本系统，需要再第二步前先按照telnet服务：计          算机右键管理 -- 功能 -- 按照 telnet 服务，另外如使用非管理员账户登录远程，需要再服务器上将用          户加入到远程桌面内置组中。</code></pre>
+<p>不同的账户拥有不同的权限，为不同的账户赋权限，也就是为不用账户的SID赋权限！</p>
+<p>查看sid值：whoami /user</p>
+<p>账户密码存储位置：c:\windows\system32\confifig\SAM #暴力破解/撞库</p>
+<p>windows系统上，默认密码最长有效期42天</p>
+<p><strong>1.2</strong> <strong>内置账户</strong></p>
+<p>给人使用的账户：</p>
+<p>administrator #管理员账户</p>
+<p>guest #来宾账户</p>
+<p>计算机服务组件相关的系统账号</p>
+<p>system #系统账户 == 权限至高无上</p>
+<p>local services #本地服务账户 == 权限等于普通用户</p>
+<p>network services #网络服务账户 == 权限等于普通用户</p>
+<p><strong>1.3</strong> <strong>配置文件</strong></p>
+<p>每个用户都有自己的配置文件（家目录），在用户第一次登录时自动产生，路径是：</p>
+<p>win7/win2008 c:\用户\ </p>
+<p>• 用户UID：500 </p>
+<p>• windows系统管理员administrator的UID是500 </p>
+<p>• 普通用户的UID是1000开始xp/win2003 c:\Documents and Settings\</p>
+<p><strong>1.4</strong> <strong>用户管理命令</strong></p>
+<pre><code class="hljs routeros">net<span class="hljs-built_in"> user </span>#查看用户列表
+net<span class="hljs-built_in"> user </span>用户名 密码 #改密码
+net<span class="hljs-built_in"> user </span>用户名 密码 /<span class="hljs-builtin-name">add</span> #创建一个新用户 
+net<span class="hljs-built_in"> user </span>用户名 /del #删除一个用户
+net<span class="hljs-built_in"> user </span>用户名 /active:yes/<span class="hljs-literal">no</span> #激活或禁用账户 
+练习： 1、练习图形及命令行中，进行用户管理（包括创建、修改密码、删除用户、登录并验证家目录产生、及权限） 2、制作一个批处理脚本，可以实现互动创建用户</code></pre>
 
-<p>netstat -an 查看本地所有开放的端口号</p>
-<p>TCP 0.0.0.0:3389 远程桌面协议RDP</p>
-<p>​         0.0.0.0:23 tenlet 端口号</p>
+<p><strong>三、组管理</strong></p>
+<p><strong>3.1</strong> <strong>组概述</strong></p>
+<p>组的作用：简化权限的赋予。</p>
+<p>赋权限方式：</p>
+<p> 1）用户—组—赋权限·</p>
+<p> 2）用户—赋权限</p>
+<p><strong>3.2</strong> <strong>内置组</strong></p>
+<p>内置组的权限默认已经被系统赋予。</p>
+<pre><code class="hljs yaml"><span class="hljs-number">1</span><span class="hljs-string">）administrators</span> <span class="hljs-comment"># 管理员组 </span>
+<span class="hljs-number">2</span><span class="hljs-string">）guests</span>         <span class="hljs-comment"># 来宾组 </span>
+<span class="hljs-number">3</span><span class="hljs-string">）users</span>          <span class="hljs-comment"># 普通用户组，默认新建用户都属于该组</span>
+<span class="hljs-number">4</span><span class="hljs-string">）network</span>        <span class="hljs-comment"># 网络配置组 </span>
+<span class="hljs-number">5</span><span class="hljs-string">）print</span>          <span class="hljs-comment"># 打印机组 </span>
+<span class="hljs-number">6</span><span class="hljs-string">）Remote</span> <span class="hljs-string">Desktop</span> <span class="hljs-comment"># 远程桌面组</span></code></pre>
+
+<p><strong>3.3</strong> <strong>组管理命令</strong></p>
+<pre><code class="hljs dockerfile">net localgroup <span class="hljs-comment"># 查看组列表 </span>
+net localgroup 组名 <span class="hljs-comment"># 查看该组的成员 </span>
+net localgroup 组名 /<span class="hljs-keyword">add</span><span class="bash"> <span class="hljs-comment"># 创建一个新的组 </span></span>
+net localgroup 组名 用户名 /<span class="hljs-keyword">add</span><span class="bash"> <span class="hljs-comment"># 添加用户到组</span></span>
+net localgroup 组名 用户名 /del <span class="hljs-comment"># 从组中踢出用户 </span>
+net localgroup 组名 /del <span class="hljs-comment"># 删除组 </span>
+练习： <span class="hljs-number">1</span>、练习图形及命令行中，进行组管理（创建组、组成员添加、查看组成员、成员脱离组、删除组） <span class="hljs-number">2</span>、创建<span class="hljs-number">1</span>个普通用户lisi，并将lisi提升为管理员，并验证lisi是否成功取得管理员权限！</code></pre>
+
+<p><strong>四、服务管理</strong></p>
+<p>开始 – 运行 – services.msc</p>
 
             </article>
             <hr>
@@ -277,9 +321,9 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/">
+                      <a href="/2020/06/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A807/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">系统部署</span>
+                        <span class="hidden-mobile">服务器远程管理</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -287,8 +331,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A808/">
-                        <span class="hidden-mobile">破解系统漏洞</span>
+                      <a href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/">
+                        <span class="hidden-mobile">系统部署</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -453,7 +497,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "服务器远程管理&nbsp;",
+        "用户与组管理&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
