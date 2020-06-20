@@ -166,11 +166,11 @@
   
   
   <entry>
-    <title>系统部署</title>
-    <link href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/"/>
-    <url>/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/</url>
+    <title>随手记</title>
+    <link href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A805/"/>
+    <url>/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A805/</url>
     
-    <content type="html"><![CDATA[<h1 id="vm"><a href="#vm" class="headerlink" title="vm"></a>vm</h1><h1 id="部署windows-xp系统"><a href="#部署windows-xp系统" class="headerlink" title="部署windows-xp系统"></a>部署windows-xp系统</h1><h2 id="一-配置虚拟机硬件并安装系统"><a href="#一-配置虚拟机硬件并安装系统" class="headerlink" title="一 配置虚拟机硬件并安装系统"></a>一 配置虚拟机硬件并安装系统</h2><p>1、在VMware文件目录下创建一个空文件夹将其命名位：winxp-1</p><p>2、打开VMware软件，点击创建新的虚拟机。</p><p>3、我们安装的是Windows系统，这里选择<strong>典型。</strong></p><p>4、这里点<strong>稍后安装</strong></p><p>5、这个根据你下载的镜像资源来选择，我给大家的是xp profession(专业版)，默认32位，xp系统是比较老的系统了，点32位默认就可以了。</p>]]></content>
+    <content type="html"><![CDATA[<p>1、重定向符号:</p><p>1&gt; 正确输出<br>2&gt; 错误输出</p><blockquote><blockquote><p>为追加<br>为覆盖</p></blockquote></blockquote><ol start="3"><li>rd . /s/q</li></ol><p>4.<br>type 文件名.扩展名 | more<br>分页显示<br>dir c:\windows | more</p><p>5.创建文件<br>1)echo<br>2)<br>copy con 文件名.扩展名<br>开始编辑内容<br>ctrl+z回车结束编写</p><p>6.快速生成一个空文件<br>fsutil file createnew c:\windows\system.ini 409600000</p><p>7.修改关联：<br>assoc .txt=exefile</p><p>8.shutdown -s -f -t 秒 -c “”</p><p>9.ren  旧名  新名</p>]]></content>
     
     
     <categories>
@@ -193,11 +193,11 @@
   
   
   <entry>
-    <title>随手记</title>
-    <link href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A805/"/>
-    <url>/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A805/</url>
+    <title>系统部署</title>
+    <link href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/"/>
+    <url>/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/</url>
     
-    <content type="html"><![CDATA[<p>1、重定向符号:</p><p>1&gt; 正确输出<br>2&gt; 错误输出</p><blockquote><blockquote><p>为追加<br>为覆盖</p></blockquote></blockquote><ol start="3"><li>rd . /s/q</li></ol><p>4.<br>type 文件名.扩展名 | more<br>分页显示<br>dir c:\windows | more</p><p>5.创建文件<br>1)echo<br>2)<br>copy con 文件名.扩展名<br>开始编辑内容<br>ctrl+z回车结束编写</p><p>6.快速生成一个空文件<br>fsutil file createnew c:\windows\system.ini 409600000</p><p>7.修改关联：<br>assoc .txt=exefile</p><p>8.shutdown -s -f -t 秒 -c “”</p><p>9.ren  旧名  新名</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="vm"><a href="#vm" class="headerlink" title="vm"></a>vm</h1><h1 id="部署windows-xp系统"><a href="#部署windows-xp系统" class="headerlink" title="部署windows-xp系统"></a>部署windows-xp系统</h1><h2 id="一-配置虚拟机硬件并安装系统"><a href="#一-配置虚拟机硬件并安装系统" class="headerlink" title="一 配置虚拟机硬件并安装系统"></a>一 配置虚拟机硬件并安装系统</h2><p>1、在VMware文件目录下创建一个空文件夹将其命名位：winxp-1</p><p>2、打开VMware软件，点击创建新的虚拟机。</p><p>3、我们安装的是Windows系统，这里选择<strong>典型。</strong></p><p>4、这里点<strong>稍后安装</strong></p><p>5、这个根据你下载的镜像资源来选择，我给大家的是xp profession(专业版)，默认32位，xp系统是比较老的系统了，点32位默认就可以了。</p>]]></content>
     
     
     <categories>
