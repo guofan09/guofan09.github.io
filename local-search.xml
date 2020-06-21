@@ -4,6 +4,60 @@
   
   
   <entry>
+    <title>文件共享服务器</title>
+    <link href="/2020/06/21/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A810/"/>
+    <url>/2020/06/21/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A810/</url>
+    
+    <content type="html"><![CDATA[<h2 id="一、共享服务器概述"><a href="#一、共享服务器概述" class="headerlink" title="一、共享服务器概述"></a><strong>一、共享服务器概述</strong></h2><p>通过网络提供文件共享服务，提供文件下载和上传服务（类似于FTP服务器）</p><h2 id="二、创建共享"><a href="#二、创建共享" class="headerlink" title="二、创建共享"></a><strong>二、创建共享</strong></h2><pre><code class="hljs brainfuck"><span class="hljs-comment">方法：文件夹右键属性</span>--<span class="hljs-comment">共享</span>--<span class="hljs-comment">开启共享</span>--<span class="hljs-comment">设置共享名</span>--<span class="hljs-comment">设置共享权限</span></code></pre><pre><code class="hljs angelscript">注：<span class="hljs-number">1</span>）在本地登录时，只受NTFS权限的影响<span class="hljs-number">2</span>）在远程登录时，将受共享及NTFS权限的共同影响，且取交集！<span class="hljs-number">3</span>）所以建议设置共享权限为everyone完全控制，然后具体的权限需求在NTFS权限中设置即可。，</code></pre><h3 id="三、访问共享"><a href="#三、访问共享" class="headerlink" title="三、访问共享"></a><strong>三、访问共享</strong></h3><pre><code class="hljs taggerscript">在开始运行/或我的电脑地址栏中，输入UNC地址： <span class="hljs-symbol">\\</span>文件共享服务器IP <span class="hljs-symbol">\\</span>文件共享服务器IP<span class="hljs-symbol">\共</span>享名</code></pre><p>判断题：</p><p>服务器上有某文件夹：d:\feifei</p><p>服务器IP：10.1.1.1</p><p>共享名： f</p><p>以下哪种方式可以正常访问该共享？</p><p>\10.1.1.1\d\feifei</p><p>\10.1.1.1\feifei</p><p>\10.1.1.1\d\f</p><p>\10.1.1.1\f    正确</p><pre><code class="hljs angelscript">案例：<span class="hljs-number">1.</span>开<span class="hljs-number">2</span>台虚拟机，并互相ping通 <span class="hljs-number">2.</span>设置<span class="hljs-number">2003</span>为共享服务器，并在客户机上可以访问共享，要求aa账户只能下载，bb账户只能上传，cc账户可以上传下载 及删除</code></pre><h2 id="四、创建隐藏的共享"><a href="#四、创建隐藏的共享" class="headerlink" title="四、创建隐藏的共享"></a><strong>四、创建隐藏的共享</strong></h2><pre><code class="hljs gams">方法：共享名<span class="hljs-symbol">$</span></code></pre><h2 id="五、访问隐藏共享的方法"><a href="#五、访问隐藏共享的方法" class="headerlink" title="五、访问隐藏共享的方法"></a><strong>五、访问隐藏共享的方法</strong></h2><pre><code class="hljs taggerscript"><span class="hljs-symbol">\服</span>务器IP<span class="hljs-symbol">\共</span>享名$</code></pre><h2 id="六、共享相关命令"><a href="#六、共享相关命令" class="headerlink" title="六、共享相关命令"></a><strong>六、共享相关命令</strong></h2><pre><code class="hljs dos"><span class="hljs-built_in">net</span> share #列出共享列表 <span class="hljs-built_in">net</span> share 共享名 /<span class="hljs-built_in">del</span> #删除共享</code></pre><h2 id="七、屏蔽系统隐藏共享自动产生"><a href="#七、屏蔽系统隐藏共享自动产生" class="headerlink" title="七、屏蔽系统隐藏共享自动产生"></a><strong>七、屏蔽系统隐藏共享自动产生</strong></h2><h3 id="6-1、打开注册表"><a href="#6-1、打开注册表" class="headerlink" title="6.1、打开注册表"></a><strong>6.1、打开注册表</strong></h3><pre><code class="hljs plain">打开注册表编辑器：regedit</code></pre><h3 id="6-2、定位共享注册表位置"><a href="#6-2、定位共享注册表位置" class="headerlink" title="6.2、定位共享注册表位置"></a><strong>6.2、定位共享注册表位置</strong></h3><pre><code class="hljs tex">HKEY_Local_MACHINE<span class="hljs-tag">\<span class="hljs-name">System</span></span><span class="hljs-tag">\<span class="hljs-name">CurrentControlSet</span></span><span class="hljs-tag">\<span class="hljs-name">Services</span></span><span class="hljs-tag">\<span class="hljs-name">LanmanServer</span></span><span class="hljs-tag">\<span class="hljs-name">Parameters</span></span><span class="hljs-tag">\</span>### 右键新建REG_DWORD类型的AutoShareServer 键，值为 0</code></pre><h2 id="八、查看本地网络连接状态"><a href="#八、查看本地网络连接状态" class="headerlink" title="八、查看本地网络连接状态"></a><strong>八、查看本地网络连接状态</strong></h2><pre><code class="hljs ebnf"><span class="hljs-attribute">netstat -an</span></code></pre><h2 id="九、关445服务"><a href="#九、关445服务" class="headerlink" title="九、关445服务"></a><strong>九、关445服务</strong></h2><pre><code class="hljs angelscript">可以通过关闭<span class="hljs-number">445</span>端口来屏蔽病毒传入（如勒索病毒等）方法<span class="hljs-number">1</span>：打开services.msc，并停止及禁用server服务方法<span class="hljs-number">2</span>：禁止被访问<span class="hljs-number">445</span>，配置高级安全防火墙-入站规则（在win7及以上系统，win2008及以上系统）net share #列出共享列表 net share 共享名 /del #删除共享</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>网络安全</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>网络</tag>
+      
+      <tag>安全</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>部署DHCP安全</title>
+    <link href="/2020/06/21/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A811/"/>
+    <url>/2020/06/21/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A811/</url>
+    
+    <content type="html"><![CDATA[<p>顺风顺水发生飞洒发发打发</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>网络安全</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>网络</tag>
+      
+      <tag>安全</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>NTFS安全权限</title>
     <link href="/2020/06/20/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A809/"/>
     <url>/2020/06/20/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A809/</url>
@@ -139,38 +193,11 @@
   
   
   <entry>
-    <title>三 DOS基本命令</title>
+    <title>DOS基本命令</title>
     <link href="/2020/06/08/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A803/"/>
     <url>/2020/06/08/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A803/</url>
     
     <content type="html"><![CDATA[<h2 id="一、DOS命令"><a href="#一、DOS命令" class="headerlink" title="一、DOS命令"></a>一、DOS命令</h2><h3 id="1-1、如何操作DOS命令"><a href="#1-1、如何操作DOS命令" class="headerlink" title="1.1、如何操作DOS命令"></a><strong>1.1</strong>、如何操作DOS命令</h3><pre><code class="hljs brainfuck"><span class="hljs-comment">建议：初学者在虚拟机中完成实验！！！！！</span> <span class="hljs-comment">开始</span>--<span class="hljs-literal">-</span><span class="hljs-comment">运行</span>--<span class="hljs-literal">-</span><span class="hljs-comment">输入cmd</span>--<span class="hljs-comment">回车，将调出C:\windows\system32\cmd</span><span class="hljs-string">.</span><span class="hljs-comment">exe</span> <span class="hljs-comment">或者Win</span> <span class="hljs-literal">+</span> <span class="hljs-comment">R</span> --<span class="hljs-literal">-</span><span class="hljs-comment">运行</span>--<span class="hljs-literal">-</span><span class="hljs-comment">输入cmd</span>--<span class="hljs-comment">回车</span></code></pre><h3 id="1-2、基本命令"><a href="#1-2、基本命令" class="headerlink" title="1.2、基本命令"></a>1.2、基本命令</h3><pre><code class="hljs basic"><span class="hljs-number">1.</span> 命令：<span class="hljs-keyword">color</span> f0 帮助：<span class="hljs-keyword">color</span> ? 作用：改变背景及字体颜色 <span class="hljs-number">2.</span> 命令：<span class="hljs-keyword">cls</span> 作用：清屏</code></pre><h3 id="1-3、目录相关命令"><a href="#1-3、目录相关命令" class="headerlink" title="1.3、目录相关命令"></a>1.3、目录相关命令</h3><pre><code class="hljs angelscript"><span class="hljs-number">3.</span> 命令:dir 作用：浏览当前文件夹的内容（带&lt;dir&gt;标识的为文件夹，否则为文件） 其他用法： dir 指定路径 dir d:\ dir d:\pic dir /a #浏览所有内容，包括隐藏内容 <span class="hljs-number">4.</span> 命令：盘符: 作用：切换分区, 如：c: d: e: <span class="hljs-number">5.</span> 命令：cd.. 作用：退出一级目录 <span class="hljs-number">6.</span> 命令：cd 文件夹名 作用：进入文件夹 <span class="hljs-number">7.</span> Tab键：补全路径功能 <span class="hljs-number">8.</span> 命令：cd \ 作用：直接退到根目录<span class="hljs-number">9.</span> 命令：md 文件夹 [文件夹 文件夹 ....] <span class="hljs-number">10.</span>命令：rd 文件夹 [文件夹 文件夹 ....] 作用：删除空文件夹 命令：rd 文件夹 /s /q 作用：无提示删除非空文件夹 <span class="hljs-number">1.</span>路径：相对路径：针对当前路径有效，如：..\<span class="hljs-number">456</span> 绝对路径：从根开始写路径,如：\<span class="hljs-number">123</span>\<span class="hljs-number">345</span></code></pre><h3 id="1-4、文件相关命令"><a href="#1-4、文件相关命令" class="headerlink" title="1.4、文件相关命令"></a>1.4、文件相关命令</h3><pre><code class="hljs dos"><span class="hljs-number">12</span>.创建文件方法： <span class="hljs-built_in">echo</span> 字符串 &gt;&gt;[路径\]文件名.扩展名 注释：&gt;&gt;和&gt;都可以将命令的输出内容输入到某文件中，若文件不存在，则同时创建该文件 &gt;&gt;为追加 &gt;为覆盖 案例：修改hosts文件 <span class="hljs-built_in">echo</span> <span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span> www.baidu.com &gt;&gt;c:\windows\system32\drivers\etc\hosts <span class="hljs-number">13</span>. 命令：<span class="hljs-built_in">type</span> 文件名.扩展名作用：浏览一个文件的内容 <span class="hljs-number">14</span>. 命令：<span class="hljs-built_in">del</span> 文件名.扩展名 作用：删除文件 <span class="hljs-built_in">del</span> *.txt #删除所有txt结尾的文件 <span class="hljs-built_in">del</span> *.* #删除所有文件 <span class="hljs-built_in">del</span> *.* /s /q #无提示删除所有文件 注释：*为通配符，代表任意字符，任意长度</code></pre><h3 id="1-5、隐藏命令"><a href="#1-5、隐藏命令" class="headerlink" title="1.5、隐藏命令"></a><strong>1.5、隐藏命令</strong></h3><pre><code class="hljs awk"><span class="hljs-number">15</span>. 修改文件或文件夹隐藏属性 命令： attrib +h 文件全名<span class="hljs-regexp">/文件夹名 #隐藏文件或文件夹 attrib +s +h 文件全名/</span>文件夹名 <span class="hljs-comment">#提升为被系统保护的文件 注释：+改为-为取消修改文件属性</span></code></pre><h3 id="1-6、复制和移动"><a href="#1-6、复制和移动" class="headerlink" title="1.6、复制和移动"></a><strong>1.6、复制和移动</strong></h3><pre><code class="hljs scss">16. 命令： 复制文件：copy <span class="hljs-selector-attr">[路径\]</span>源文件全名 目标路径<span class="hljs-selector-attr">[\新文件全名]</span> 移动文件：move <span class="hljs-selector-attr">[路径\]</span>源文件全名 目标路径<span class="hljs-selector-attr">[\新文件全名]</span></code></pre><h3 id="1-7、定时关机或重启"><a href="#1-7、定时关机或重启" class="headerlink" title="1.7、定时关机或重启"></a><strong>1.7、定时关机或重启</strong></h3><pre><code class="hljs autoit">命令：定时关机或重启 <span class="hljs-built_in">shutdown</span> -s -t 秒 <span class="hljs-meta">#定时关机 </span><span class="hljs-built_in">shutdown</span> -s -f -t 秒 <span class="hljs-meta">#定时强制关机 </span><span class="hljs-built_in">shutdown</span> -r -t 秒 <span class="hljs-meta">#定时重启，同上加-f,为强制重启 s</span>hutdown -a <span class="hljs-meta">#取消定时 </span><span class="hljs-built_in">shutdown</span> -l <span class="hljs-meta">#注销，同logoff命令相同。</span></code></pre>]]></content>
-    
-    
-    <categories>
-      
-      <category>网络安全</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>网络</tag>
-      
-      <tag>安全</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>ip地址详解</title>
-    <link href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A802/"/>
-    <url>/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A802/</url>
-    
-    <content type="html"><![CDATA[<h2 id="局域网"><a href="#局域网" class="headerlink" title="局域网"></a>局域网</h2><p>局域网：一般称为内网</p><p>单局域网构成：交换机，网线，pc</p><p>交换机：用来组建内网的局域网的设备</p><h2 id="ip地址"><a href="#ip地址" class="headerlink" title="ip地址"></a>ip地址</h2><p>定义：IP地址就是一个唯一标识 是一段网络编码</p><p>32位二进制</p><p>10进制： x.x.x.x x的范围 0-255</p><h2 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h2><p>局域网通信规则：在同一个局域网中，所有IP必须在同一个网段中才可以互相通信</p><p>IP构成：网络位 +主机位（网络位相同的IP地址，为同一个网段）</p><p>子网掩码：用来确定IP地址的网络位</p><p>子网掩码如何确定网络位： 与255对应的数字为网络位，与0对应的数字为主机位</p><pre><code class="hljs accesslog">三个子网掩码：<span class="hljs-number">255.0.0.0</span><span class="hljs-number">255.255.0.0</span><span class="hljs-number">255.255.255.0</span></code></pre><h2 id="IP地址详解"><a href="#IP地址详解" class="headerlink" title="IP地址详解"></a>IP地址详解</h2><p>ISO定义五大类：（是以IP地址的第一位进行区分的）</p><p>A类：1-126 默认子网掩码：255.0.0.0</p><p>B类：128-191 默认子网掩码：255.255.0.0</p><p>C类：192-223 默认子网掩码：255.255.255.0</p><p>D类：224-239 组播地址</p><p>E类：240-254 科研使用</p><pre><code class="hljs angelscript">注：目前我们只能使用A、B、C类 子网掩码可以修改每个网段的地址分三类：<span class="hljs-number">1</span>、<span class="hljs-number">0</span> 该网段的名称<span class="hljs-number">2</span>、<span class="hljs-number">255</span> 该网段的广播地址<span class="hljs-number">2</span>、中间的可用地址<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> 回环地址（跟自己通信）网关</code></pre><p><strong>举例：IP地址 ：10.1.1.1  子网掩码：255.255.255.0</strong></p><p>​           <strong>该IP地址的网段  完整为 10.1.1.0    即10.1.1.0不能作为IP地址 主机位不能够为0</strong></p><p>​           <strong>该网段有多少地址？理论上除了0 还有255个 但是实际上只有254个 最后一个255作为主机位</strong></p><p>​           <strong>最后一位如果是255 作为广播地址</strong>      </p><p><font color=red> 主机位不能全为0 也不能全为255</font></p><h3 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h3><p>网关：一个网络的出口，Gateway=GW，一般网关在路由器上</p><p>路由器：可以连接外网的设备</p><pre><code class="hljs angelscript">pc向外发包<span class="hljs-number">1</span>、首先判断目标IP与自己是否在 同一个网段<span class="hljs-number">2</span>、如在同一个网段，则直接发出去，不找网关<span class="hljs-number">3</span>、如不在同一个网段，则发包给网关</code></pre><p>网关一般为 同网段的最后一位或第一位</p><p>比如IP地址为 10.1.1.224   他的网关可能为10.1.1.254或者10.1.1.1  不过也有可能是中间的</p><h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><p> 测试网络连通性</p><pre><code class="hljs routeros">ping 目标IP地址                       #测试网络连通性，有去有回即为可以成功通路ping -t 目标IP地址                    #一直pingping -n 数字 目标ip地址           #修改ping包的数量（默认4）ping -l 数字 目标ip地址            #修改ping 包的大小</code></pre><p><img src="/wenzhang/Netimg/01.png" srcset="/img/loading.gif" alt=""></p><p>手工解析域名</p><pre><code class="hljs css"><span class="hljs-selector-tag">nslookup</span> <span class="hljs-selector-tag">www</span><span class="hljs-selector-class">.baidu</span><span class="hljs-selector-class">.com</span></code></pre><p><img src="/wenzhang/Netimg/02.png" srcset="/img/loading.gif" alt=""></p><p>如何查看ip</p><pre><code class="hljs glsl">ipconfig           <span class="hljs-meta">#查看ip基本信息</span>ipconfig /<span class="hljs-built_in">all</span>      <span class="hljs-meta">#查看ip所有信息</span></code></pre><h1 id="DOS命令"><a href="#DOS命令" class="headerlink" title="DOS命令"></a>DOS命令</h1><pre><code class="hljs routeros">cd<span class="hljs-built_in">..</span>               返回上级目录cd\                返回根目录d:                 进入D盘cls                清空所有dos操作dir                显示当前盘符文件信息rd . /s/q        清空磁盘浏览文件type 文件名.扩展名                 显示type 文件名.扩展名 |more       分页显示例如：dir c:\windows |more创建文件1）echo2) copy con 文件名.扩展名开始编写内容ctrl+z      回车结束编写删除文件del *.txt                  删除所有txt结尾的文件del *.*                    删除文件del *.* /s/q             无提示删除md 文件名                 创建文件夹attrib +h 文件名         隐藏文件夹attrib -h 文件名          取消文件夹attrib +h +s +a 文件名              将文件夹隐藏设为系统文件dir /a                          显示当前磁盘所有包括系统文件快速生成一个空文件（有大小）fsutil file createnew c:\system.ini 数字       在c盘创建文件指定文件大小修改关联assoc .<span class="hljs-attribute">txt</span>=exefile         修改打开txt文件的程序 使其无法打开assoc .<span class="hljs-attribute">txt</span>=txtfile           恢复shutdownshutdown -s -t 100 定时关机shutdown -s -f -t 100 定时强制关机shutdown -r -t 秒 定时重启shutdown -a 取消定时shutdown -l 注销，同logoff命令相同shutdown -s -f -t 100 -c <span class="hljs-string">"haah"</span>ren 旧名 新名                      重命名move 原地址 新地址           移动copy 原地址 目的地址         复制粘贴</code></pre>]]></content>
     
     
     <categories>
@@ -225,6 +252,33 @@
     <url>/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/</url>
     
     <content type="html"><![CDATA[<h1 id="vm"><a href="#vm" class="headerlink" title="vm"></a>vm</h1><h1 id="部署windows-xp系统"><a href="#部署windows-xp系统" class="headerlink" title="部署windows-xp系统"></a>部署windows-xp系统</h1><h2 id="一-配置虚拟机硬件并安装系统"><a href="#一-配置虚拟机硬件并安装系统" class="headerlink" title="一 配置虚拟机硬件并安装系统"></a>一 配置虚拟机硬件并安装系统</h2><p>1、在VMware文件目录下创建一个空文件夹将其命名位：winxp-1</p><p>2、打开VMware软件，点击创建新的虚拟机。</p><p>3、我们安装的是Windows系统，这里选择<strong>典型。</strong></p><p>4、这里点<strong>稍后安装</strong></p><p>5、这个根据你下载的镜像资源来选择，我给大家的是xp profession(专业版)，默认32位，xp系统是比较老的系统了，点32位默认就可以了。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>网络安全</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>网络</tag>
+      
+      <tag>安全</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>ip地址详解</title>
+    <link href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A802/"/>
+    <url>/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A802/</url>
+    
+    <content type="html"><![CDATA[<h2 id="局域网"><a href="#局域网" class="headerlink" title="局域网"></a>局域网</h2><p>局域网：一般称为内网</p><p>单局域网构成：交换机，网线，pc</p><p>交换机：用来组建内网的局域网的设备</p><h2 id="ip地址"><a href="#ip地址" class="headerlink" title="ip地址"></a>ip地址</h2><p>定义：IP地址就是一个唯一标识 是一段网络编码</p><p>32位二进制</p><p>10进制： x.x.x.x x的范围 0-255</p><h2 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h2><p>局域网通信规则：在同一个局域网中，所有IP必须在同一个网段中才可以互相通信</p><p>IP构成：网络位 +主机位（网络位相同的IP地址，为同一个网段）</p><p>子网掩码：用来确定IP地址的网络位</p><p>子网掩码如何确定网络位： 与255对应的数字为网络位，与0对应的数字为主机位</p><pre><code class="hljs accesslog">三个子网掩码：<span class="hljs-number">255.0.0.0</span><span class="hljs-number">255.255.0.0</span><span class="hljs-number">255.255.255.0</span></code></pre><h2 id="IP地址详解"><a href="#IP地址详解" class="headerlink" title="IP地址详解"></a>IP地址详解</h2><p>ISO定义五大类：（是以IP地址的第一位进行区分的）</p><p>A类：1-126 默认子网掩码：255.0.0.0</p><p>B类：128-191 默认子网掩码：255.255.0.0</p><p>C类：192-223 默认子网掩码：255.255.255.0</p><p>D类：224-239 组播地址</p><p>E类：240-254 科研使用</p><pre><code class="hljs angelscript">注：目前我们只能使用A、B、C类 子网掩码可以修改每个网段的地址分三类：<span class="hljs-number">1</span>、<span class="hljs-number">0</span> 该网段的名称<span class="hljs-number">2</span>、<span class="hljs-number">255</span> 该网段的广播地址<span class="hljs-number">2</span>、中间的可用地址<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> 回环地址（跟自己通信）网关</code></pre><p><strong>举例：IP地址 ：10.1.1.1  子网掩码：255.255.255.0</strong></p><p>​           <strong>该IP地址的网段  完整为 10.1.1.0    即10.1.1.0不能作为IP地址 主机位不能够为0</strong></p><p>​           <strong>该网段有多少地址？理论上除了0 还有255个 但是实际上只有254个 最后一个255作为主机位</strong></p><p>​           <strong>最后一位如果是255 作为广播地址</strong>      </p><p><font color=red> 主机位不能全为0 也不能全为255</font></p><h3 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h3><p>网关：一个网络的出口，Gateway=GW，一般网关在路由器上</p><p>路由器：可以连接外网的设备</p><pre><code class="hljs angelscript">pc向外发包<span class="hljs-number">1</span>、首先判断目标IP与自己是否在 同一个网段<span class="hljs-number">2</span>、如在同一个网段，则直接发出去，不找网关<span class="hljs-number">3</span>、如不在同一个网段，则发包给网关</code></pre><p>网关一般为 同网段的最后一位或第一位</p><p>比如IP地址为 10.1.1.224   他的网关可能为10.1.1.254或者10.1.1.1  不过也有可能是中间的</p><h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><p> 测试网络连通性</p><pre><code class="hljs routeros">ping 目标IP地址                       #测试网络连通性，有去有回即为可以成功通路ping -t 目标IP地址                    #一直pingping -n 数字 目标ip地址           #修改ping包的数量（默认4）ping -l 数字 目标ip地址            #修改ping 包的大小</code></pre><p><img src="/wenzhang/Netimg/01.png" srcset="/img/loading.gif" alt=""></p><p>手工解析域名</p><pre><code class="hljs css"><span class="hljs-selector-tag">nslookup</span> <span class="hljs-selector-tag">www</span><span class="hljs-selector-class">.baidu</span><span class="hljs-selector-class">.com</span></code></pre><p><img src="/wenzhang/Netimg/02.png" srcset="/img/loading.gif" alt=""></p><p>如何查看ip</p><pre><code class="hljs glsl">ipconfig           <span class="hljs-meta">#查看ip基本信息</span>ipconfig /<span class="hljs-built_in">all</span>      <span class="hljs-meta">#查看ip所有信息</span></code></pre><h1 id="DOS命令"><a href="#DOS命令" class="headerlink" title="DOS命令"></a>DOS命令</h1><pre><code class="hljs routeros">cd<span class="hljs-built_in">..</span>               返回上级目录cd\                返回根目录d:                 进入D盘cls                清空所有dos操作dir                显示当前盘符文件信息rd . /s/q        清空磁盘浏览文件type 文件名.扩展名                 显示type 文件名.扩展名 |more       分页显示例如：dir c:\windows |more创建文件1）echo2) copy con 文件名.扩展名开始编写内容ctrl+z      回车结束编写删除文件del *.txt                  删除所有txt结尾的文件del *.*                    删除文件del *.* /s/q             无提示删除md 文件名                 创建文件夹attrib +h 文件名         隐藏文件夹attrib -h 文件名          取消文件夹attrib +h +s +a 文件名              将文件夹隐藏设为系统文件dir /a                          显示当前磁盘所有包括系统文件快速生成一个空文件（有大小）fsutil file createnew c:\system.ini 数字       在c盘创建文件指定文件大小修改关联assoc .<span class="hljs-attribute">txt</span>=exefile         修改打开txt文件的程序 使其无法打开assoc .<span class="hljs-attribute">txt</span>=txtfile           恢复shutdownshutdown -s -t 100 定时关机shutdown -s -f -t 100 定时强制关机shutdown -r -t 秒 定时重启shutdown -a 取消定时shutdown -l 注销，同logoff命令相同shutdown -s -f -t 100 -c <span class="hljs-string">"haah"</span>ren 旧名 新名                      重命名move 原地址 新地址           移动copy 原地址 目的地址         复制粘贴</code></pre>]]></content>
     
     
     <categories>
