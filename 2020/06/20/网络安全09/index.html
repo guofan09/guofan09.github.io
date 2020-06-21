@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>破解系统漏洞 - 浮生一梦</title>
+  <title>NTFS安全权限 - 浮生一梦</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-06-17 11:43">
-      June 17, 2020 am
+    <time datetime="2020-06-20 11:43">
+      June 20, 2020 am
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      716 字
+      1.1k 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      11
        分钟
     </span>
   
@@ -224,32 +224,110 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="一、利用5次shift漏洞破解win7密码"><a href="#一、利用5次shift漏洞破解win7密码" class="headerlink" title="一、利用5次shift漏洞破解win7密码"></a><strong>一、利用5次shift漏洞破解win7密码</strong></h2><h3 id="1-1-漏洞"><a href="#1-1-漏洞" class="headerlink" title="1.1 漏洞"></a><strong>1.1</strong> <strong>漏洞</strong></h3><pre><code class="hljs angelscript"><span class="hljs-number">1</span>、在未登录系统时，连续按<span class="hljs-number">5</span>次shift键，弹出程序c:\windows\system32\sethc.exe 
-<span class="hljs-number">2</span>、部分win7及win10系统在未进入系统时，可以通过系统修复漏洞篡改系统文件名！ 注：如win7或win10系统已修补漏洞<span class="hljs-number">2</span>，则无法利用</code></pre>
-
-<h3 id="1-2-破解过程相关知识"><a href="#1-2-破解过程相关知识" class="headerlink" title="1.2 破解过程相关知识"></a><strong>1.2</strong> <strong>破解过程相关知识</strong></h3><pre><code class="hljs routeros">1、cmd工具路径 c:\windows\system32\cmd 
-2、用户/账户密码存储位置 c:\windows\system32\config\SAM # 非逆转型加密、使用hash值类似的方法、MD5 SHA 
-3、修改账户密码： net<span class="hljs-built_in"> user </span>用户名 新密码</code></pre>
-
-<h3 id="1-3-漏洞利用过程"><a href="#1-3-漏洞利用过程" class="headerlink" title="1.3 漏洞利用过程"></a><strong>1.3</strong> <strong>漏洞利用过程</strong></h3><pre><code class="hljs angelscript">案例：破解win7系统密码 实验步骤： 
-<span class="hljs-number">1</span>、开启win7虚拟机，开机，并设置一个复杂密码； 
-<span class="hljs-number">2</span>、关机，并开机，在出现windows启动界面时强制关机； 
-<span class="hljs-number">3</span>、再开机，出现“启动修复（推荐）”及选择该项； # 如为出现，多尝试几次第<span class="hljs-number">2</span>步，如还不行，请换其他方法 
-<span class="hljs-number">4</span>、出现系统还原提示，点击取消，等待几分钟后，会出现问题原因，点击查看详细信息； 
-<span class="hljs-number">5</span>、打开最后一个链接即一个记事本； 
-<span class="hljs-number">6</span>、记事本中点打开，并选择显示所有文件； 
-<span class="hljs-number">7</span>、找到sethc并改名sethc-bak，再找到cmd，复制一份cmd改名为sethc 
-<span class="hljs-number">8</span>、全部关闭，重启。 
-<span class="hljs-number">9</span>、系统启动完毕后，连续按<span class="hljs-number">5</span>次shift键，将弹出cmd工具，使用命令net user 用户名 新密码，将当前用户密码修 改掉即可，或者另外建立<span class="hljs-number">1</span>个用户，并提升为管理员，注销后，可再删除新建的用户，这样的好处为不修改当前用户的密 码即可登录系统。</code></pre>
-
-<h2 id="二、利用PE系统破解XP密码"><a href="#二、利用PE系统破解XP密码" class="headerlink" title="二、利用PE系统破解XP密码"></a><strong>二、利用PE系统破解XP密码</strong></h2><h3 id="2-1-漏洞"><a href="#2-1-漏洞" class="headerlink" title="2.1 漏洞"></a><strong>2.1</strong> <strong>漏洞</strong></h3><pre><code class="hljs plain">PE系统，独立于硬盘系统的微型系统，通过PE系统启动可以对系统的SAM文件做修改</code></pre>
-
-<h3 id="2-2-破解过程相关知识"><a href="#2-2-破解过程相关知识" class="headerlink" title="2.2 破解过程相关知识"></a><strong>2.2</strong> <strong>破解过程相关知识</strong></h3><pre><code class="hljs taggerscript">账户密码存储文件：c:<span class="hljs-symbol">\w</span>indows<span class="hljs-symbol">\s</span>ystem32<span class="hljs-symbol">\c</span>onfig<span class="hljs-symbol">\S</span>AM U盘引导系统：开机修改启动顺序，并将U盘设置为第一启动顺序！（一般电脑是开机马上按F2键，进入BIOS，修改启动 顺序，不同品牌电脑设置方法不一样，可咨询售后）</code></pre>
-
-<h3 id="2-3-漏洞利用过程"><a href="#2-3-漏洞利用过程" class="headerlink" title="2.3 漏洞利用过程"></a><strong>2.3</strong> <strong>漏洞利用过程</strong></h3><pre><code class="hljs angelscript"><span class="hljs-number">1.</span>下载PE制作工具（如老毛桃，大白菜，深度等），插入空U盘或光盘，一键制作PE系统到U盘 
-<span class="hljs-number">2.</span>为XP系统设置一个复杂密码，并关机。 
-<span class="hljs-number">3.</span>插入带有PE系统的U盘或光盘，开机，马上按F2，进入BIOS，设置启动顺序为U盘或光盘为第一位，保存 <span class="hljs-number">4.</span>重启，进入PE菜单或PE系统，使用破解密码程序进行破解。（不同的PE系统菜单不一样，但一般都有破解密码选项）</code></pre>
-
+              <h2 id="一、NTFS权限概述"><a href="#一、NTFS权限概述" class="headerlink" title="一、NTFS权限概述"></a>一、NTFS权限概述</h2><p>1、通过设置NTFS权限，实现不同的用户访问不同对象的权限               //对象 文件和文件夹    设置权限</p>
+<p>2、分配了正确的访问权限后，用户才能访问其资源</p>
+<p>3、设置权限防止资源被篡改、删除</p>
+<h2 id="二、文件系统概述"><a href="#二、文件系统概述" class="headerlink" title="二、文件系统概述"></a><strong>二、文件系统概述</strong></h2><p>文件系统即在外部存储设备上组织文件的方法</p>
+<p>常用的文件系统：</p>
+<p>•FAT windows </p>
+<p>•NTFS windows </p>
+<p>•EXT linux常见FAT转换为NTFS： convert 盘符: /fs:ntfs </p>
+<p>#数据不丢失，但不可逆！</p>
+<h2 id="三、NTFS文件系统特点"><a href="#三、NTFS文件系统特点" class="headerlink" title="三、NTFS文件系统特点"></a><strong>三、NTFS文件系统特点</strong></h2><ol>
+<li><p>提高磁盘读写性能</p>
+</li>
+<li><p>可靠性</p>
+<p>加密文件系统</p>
+</li>
+</ol>
+<p>​       访问控制列表（设置权限）</p>
+<ol start="3">
+<li>磁盘利用率</li>
+</ol>
+<p>​        压缩</p>
+<p>​       磁盘配额</p>
+<ol start="4">
+<li>支持单个文件大于4个G</li>
+</ol>
+<h2 id="四、修改NTFS权限"><a href="#四、修改NTFS权限" class="headerlink" title="四、修改NTFS权限"></a><strong>四、修改NTFS权限</strong></h2><h3 id="4-1、取消权限继承"><a href="#4-1、取消权限继承" class="headerlink" title="4.1、取消权限继承"></a><strong>4.1、取消权限继承</strong></h3><p> 作用：取消后，可以任意修改权限列表了。</p>
+<p> 方法：文件夹右键属性—安全—高级—去掉第一个对号–选择复制即可</p>
+<h3 id="4-2、文件及文件夹权限"><a href="#4-2、文件及文件夹权限" class="headerlink" title="4.2、文件及文件夹权限"></a><strong>4.2、文件及文件夹权限</strong></h3><table>
+<thead>
+<tr>
+<th>文件权限</th>
+<th>权限内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>完全控制</td>
+<td>拥有读取、写入、修改、删除文件、及特殊的权限</td>
+</tr>
+<tr>
+<td>修改</td>
+<td>拥有读取、写入、修改、删除文件的权限</td>
+</tr>
+<tr>
+<td>读取和执行</td>
+<td>拥有读取、及执行文件的权限</td>
+</tr>
+<tr>
+<td>读取</td>
+<td>拥有读取文件的权限</td>
+</tr>
+<tr>
+<td>写入</td>
+<td>拥有修改文件内容的权限</td>
+</tr>
+<tr>
+<td>特殊权限</td>
+<td>控制文件权限列表的权限</td>
+</tr>
+</tbody></table>
+<p><strong>文件夹权限</strong> </p>
+<p><strong>权限内容</strong></p>
+<p>完全控制 </p>
+<p>拥有对文件及文件夹读取、写入、修改、删除文件、及特殊的权限</p>
+<p>修改 </p>
+<p>拥有对文件及文件夹读取、写入、修改、删除文件的权限</p>
+<p>读取和执行 </p>
+<p>拥有对文件夹中的文件下载、读取、及执行的权限</p>
+<p>列出文件夹内容 </p>
+<p>可以列出文件夹的内容</p>
+<p>读取 </p>
+<p>拥有对文件夹中的文件下载、读取的权限</p>
+<p>写入 </p>
+<p>拥有在文件夹中创建新的文件的权限</p>
+<p>特殊权限 </p>
+<p>控制文件夹权限列表的权限</p>
+<h3 id="4-3、权限累加"><a href="#4-3、权限累加" class="headerlink" title="4.3、权限累加"></a><strong>4.3、权限累加</strong></h3><p> 当用户同时属于多个组时，权限是累加的!</p>
+<h3 id="4-4、拒绝最大"><a href="#4-4、拒绝最大" class="headerlink" title="4.4、拒绝最大"></a><strong>4.4、拒绝最大</strong></h3><p> 当用户权限累加时，如遇到拒绝权限，拒绝最大！</p>
+<p>案例： </p>
+<p>建立jimi文件夹，并设置NTFS权限，要求a用户只能读取文件夹中的文件，不能在jimi文件夹中创建新的文件，b用户只 </p>
+<p>能在jimi文件夹中创建新的文件，不能读取文件。 </p>
+<p>案例： </p>
+<p>用户a同时属于IT组与HR组，IT组对文件夹jimi可以读取，HR组可以对jimi文件夹写入，则a用户最终的权限为读取和写 </p>
+<p>入。</p>
+<h3 id="4-5、取得所有权"><a href="#4-5、取得所有权" class="headerlink" title="4.5、取得所有权"></a><strong>4.5、取得所有权</strong></h3><p> 默认只有administrator有这个权限！</p>
+<p> 作用：可以将任何文件夹的所有者改为administrator</p>
+<h3 id="4-6、强制继承"><a href="#4-6、强制继承" class="headerlink" title="4.6、强制继承"></a><strong>4.6、强制继承</strong></h3><p> 作用：对下强制继承父子关系！</p>
+<p> 方法：文件夹右键属性–安全–高级–勾上第二个对号，即可！</p>
+<h3 id="4-7、文件复制对权限的影响"><a href="#4-7、文件复制对权限的影响" class="headerlink" title="4.7、文件复制对权限的影响"></a><strong>4.7、文件复制对权限的影响</strong></h3><p>文件复制后，文件的权限会被目标文件夹的权限覆盖。</p>
+<p>案例： </p>
+<p>用户a属于财务部组，财务部组成员为10个用户，财务部组拥有对文件夹xxx访问权限，现要求a用户不能脱离财务部组， </p>
+<p>同时要求a没有访问文件夹xxx的权限。 </p>
+<p>案例： </p>
+<p>用户a已离职，但xxx文件夹的属主是a，由于a用户对xxx文件夹做过权限修改，导致其他用户对xxx文件夹没有任何权 </p>
+<p>限，现需要管理员administrator用户将xxx文件夹重新修改权限。 </p>
+<p>案例： </p>
+<p>xxx文件夹下有多个子文件夹及文件，由于长时间的权限管理，多个子文件夹的权限都做过不同的权限修改，现需要xxx </p>
+<p>下的所有子文件及文件夹的权限全部统一。 </p>
+<p>本章练习： </p>
+<p>1.创建一个文件夹，实现tom用户只能创建新的文件，jack用户只能读取及下载文件 </p>
+<p>2.将用户a加入到ceo组，且不能从该组中剔除,为文件夹jimi赋权限，要求ceo组可以完全控制jimi文件夹，但a不能访 </p>
+<p>问该文件夹。 </p>
+<p>3.普通用户创建文件，并设置权限，且未给管理员任何权限，管理员登录系统后，能够成功删除该文件 </p>
+<p>4.练习强制继承，并验证成功性。</p>
+<p>嘻嘻嘻嘻嘻</p>
 
             </article>
             <hr>
@@ -282,18 +360,12 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/06/20/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A809/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">NTFS安全权限</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/06/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A807/">
-                        <span class="hidden-mobile">服务器远程管理</span>
+                      <a href="/2020/06/17/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A808/">
+                        <span class="hidden-mobile">破解系统漏洞</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -458,7 +530,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "破解系统漏洞&nbsp;",
+        "NTFS安全权限&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
