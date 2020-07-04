@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>文件共享服务器 - 浮生一梦</title>
+  <title>DNS服务器部署 - 浮生一梦</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-06-21 11:43">
-      June 21, 2020 am
+    <time datetime="2020-07-04 19:00">
+      July 4, 2020 pm
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      537 字
+      895 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      10
        分钟
     </span>
   
@@ -224,57 +224,87 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="一、共享服务器概述"><a href="#一、共享服务器概述" class="headerlink" title="一、共享服务器概述"></a><strong>一、共享服务器概述</strong></h2><p>通过网络提供文件共享服务，提供文件下载和上传服务（类似于FTP服务器）</p>
-<h2 id="二、创建共享"><a href="#二、创建共享" class="headerlink" title="二、创建共享"></a><strong>二、创建共享</strong></h2><pre><code class="hljs brainfuck"><span class="hljs-comment">方法：文件夹右键属性</span>--<span class="hljs-comment">共享</span>--<span class="hljs-comment">开启共享</span>--<span class="hljs-comment">设置共享名</span>--<span class="hljs-comment">设置共享权限</span></code></pre>
+              <h2 id="1、DNS"><a href="#1、DNS" class="headerlink" title="1、DNS"></a>1、DNS</h2><pre><code class="hljs routeros">Domain Name Service
+域名服务
+作用：为客户机提供域名解析服务器</code></pre>
 
-<pre><code class="hljs angelscript">注：
-<span class="hljs-number">1</span>）在本地登录时，只受NTFS权限的影响
-<span class="hljs-number">2</span>）在远程登录时，将受共享及NTFS权限的共同影响，且取交集！
-<span class="hljs-number">3</span>）所以建议设置共享权限为everyone完全控制，然后具体的权限需求在NTFS权限中设置即可。，</code></pre>
+<h2 id="2、域名组成"><a href="#2、域名组成" class="headerlink" title="2、域名组成"></a><strong>2、域名组成</strong></h2><h3 id="2-1、域名组成概述"><a href="#2-1、域名组成概述" class="headerlink" title="2.1、域名组成概述"></a><strong>2.1、域名组成概述</strong></h3><pre><code class="hljs css">如"<span class="hljs-selector-tag">www</span><span class="hljs-selector-class">.sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>"是一个域名，从严格意义上讲，"<span class="hljs-selector-tag">sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>"才被称为域名(全球唯一)，而"<span class="hljs-selector-tag">www</span>"是主机
+名。
+"主机名.域名"称为完全限定域名(<span class="hljs-selector-tag">FQDN</span>)。一个域名下可以有多个主机，域名全球唯一，那么"主机名.域名"肯定也
+是全球唯一的。
+以"<span class="hljs-selector-tag">sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>"域名为例，一般管理员在命名其主机的时候会根据其主机的功能而命名，比如网站的是<span class="hljs-selector-tag">www</span>，博
+客的是<span class="hljs-selector-tag">blog</span>，论坛的是<span class="hljs-selector-tag">bbs</span>，那么对应的<span class="hljs-selector-tag">FQDN</span>为<span class="hljs-selector-tag">www</span><span class="hljs-selector-class">.sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>，<span class="hljs-selector-tag">blog</span><span class="hljs-selector-class">.sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>，<span class="hljs-selector-tag">bbs</span><span class="hljs-selector-class">.sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>。这么多个<span class="hljs-selector-tag">FQDN</span>，然而我们只需要申请一个域名即"<span class="hljs-selector-tag">sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>"即可。</code></pre>
 
-<h3 id="三、访问共享"><a href="#三、访问共享" class="headerlink" title="三、访问共享"></a><strong>三、访问共享</strong></h3><pre><code class="hljs taggerscript">在开始运行/或我的电脑地址栏中，输入UNC地址： 
-<span class="hljs-symbol">\\</span>文件共享服务器IP 
-<span class="hljs-symbol">\\</span>文件共享服务器IP<span class="hljs-symbol">\共</span>享名</code></pre>
+<h3 id="2-2、域名组成"><a href="#2-2、域名组成" class="headerlink" title="2.2、域名组成"></a><strong>2.2、域名组成</strong></h3><p><strong>树形结构</strong></p>
+<p>根域 . </p>
+<p><img src="/wenzhang/Netimg/04.png" srcset="/img/loading.gif" alt=""></p>
+<pre><code class="hljs properties"><span class="hljs-attr">顶级域</span>
+<span class="hljs-meta">国家顶级域</span> <span class="hljs-string">cn jp hk uk</span>
+<span class="hljs-meta">商业顶级域</span> <span class="hljs-string">com 商业机构</span>
+ <span class="hljs-attr">gov</span> <span class="hljs-string">政府机构</span>
+ <span class="hljs-attr">mil</span> <span class="hljs-string">军事机构</span>
+ <span class="hljs-attr">edu</span> <span class="hljs-string"></span>
+<span class="hljs-attr">教育机构</span>
+ <span class="hljs-attr">org</span> <span class="hljs-string">民间组织架构</span>
+ <span class="hljs-attr">net</span> <span class="hljs-string">互联网</span>
+ <span class="hljs-attr">一级域名</span>
+ <span class="hljs-attr">二级域名</span>
+<span class="hljs-attr">。。。。</span></code></pre>
 
-<p>判断题：</p>
-<p>服务器上有某文件夹：d:\feifei</p>
-<p>服务器IP：10.1.1.1</p>
-<p>共享名： f</p>
-<p>以下哪种方式可以正常访问该共享？</p>
-<p>\10.1.1.1\d\feifei</p>
-<p>\10.1.1.1\feifei</p>
-<p>\10.1.1.1\d\f</p>
-<p>\10.1.1.1\f    正确</p>
-<pre><code class="hljs angelscript">案例：
-<span class="hljs-number">1.</span>开<span class="hljs-number">2</span>台虚拟机，并互相ping通 
-<span class="hljs-number">2.</span>设置<span class="hljs-number">2003</span>为共享服务器，并在客户机上可以访问共享，要求aa账户只能下载，bb账户只能上传，cc账户可以上传下载 及删除</code></pre>
+<h2 id="3、监听端口："><a href="#3、监听端口：" class="headerlink" title="3、监听端口："></a>3、监听端口：</h2><p>TCP53<br>UDP53 </p>
+<h2 id="4、DNS解析种类"><a href="#4、DNS解析种类" class="headerlink" title="4、DNS解析种类"></a><strong>4、DNS解析种类</strong></h2><h3 id="4-1、按照查询方式分类："><a href="#4-1、按照查询方式分类：" class="headerlink" title="4.1、按照查询方式分类："></a><strong>4.1、按照查询方式分类：</strong></h3><pre><code class="hljs armasm">如：www.<span class="hljs-keyword">baidu.com. </span>
+<span class="hljs-number">1</span>.为根域
+<span class="hljs-symbol">.com</span>为顶级域 
+<span class="hljs-keyword">baidu为一级域名 </span>
+<span class="hljs-symbol">www</span>为主机名 
+<span class="hljs-symbol">FQDN</span>=主机名.DNS后缀 
+<span class="hljs-symbol">FQDN</span>（完整合格的域名）</code></pre>
 
-<h2 id="四、创建隐藏的共享"><a href="#四、创建隐藏的共享" class="headerlink" title="四、创建隐藏的共享"></a><strong>四、创建隐藏的共享</strong></h2><pre><code class="hljs gams">方法：共享名<span class="hljs-symbol">$</span></code></pre>
+<p>1）递归查询：客户机与本地DNS服务器之间 </p>
+<p>2）迭代查询：本地DNS服务器与根等其他DNS服务器的解析过程</p>
+<h3 id="4-2、按照查询内容分类："><a href="#4-2、按照查询内容分类：" class="headerlink" title="4.2、按照查询内容分类："></a><strong>4.2、按照查询内容分类：</strong></h3><p> 1）正向解析：已知域名，解析IP地址</p>
+<p> 2）反向解析：已知IP地址，解析域名</p>
+<h2 id="5、DNS服务器搭建过程"><a href="#5、DNS服务器搭建过程" class="headerlink" title="5、DNS服务器搭建过程"></a><strong>5、DNS服务器搭建过程</strong></h2><pre><code class="hljs angelscript"> <span class="hljs-number">1</span>）要求网卡IP是静态IP地址。
+ <span class="hljs-number">2</span>）安装DNS服务器插件（也就是安装并开启TCP及UDP53端口）
+ <span class="hljs-number">3</span>）创建区域文件（负责一个域名后缀的解析，如baidu.com为域名后缀，一台DNS服务器内可存放多个区域文
+件）
+ <span class="hljs-number">4</span>）新建A记录</code></pre>
 
-<h2 id="五、访问隐藏共享的方法"><a href="#五、访问隐藏共享的方法" class="headerlink" title="五、访问隐藏共享的方法"></a><strong>五、访问隐藏共享的方法</strong></h2><pre><code class="hljs taggerscript"><span class="hljs-symbol">\服</span>务器IP<span class="hljs-symbol">\共</span>享名$</code></pre>
+<h2 id="6、DNS客户机如何解析"><a href="#6、DNS客户机如何解析" class="headerlink" title="6、DNS客户机如何解析"></a><strong>6、DNS客户机如何解析</strong></h2><pre><code class="hljs angelscript"><span class="hljs-number">1</span>）指向DNS
+<span class="hljs-number">2</span>）手工解析域名：
+nslookup 域名 服务器处理域名请求的顺序
+<span class="hljs-number">1</span>）DNS高速缓存（必须学会如何查看及清空）
+<span class="hljs-number">2</span>）DNS区域配置文件
+<span class="hljs-number">3</span>）DNS转发器
+<span class="hljs-number">4</span>）根提示</code></pre>
 
-<h2 id="六、共享相关命令"><a href="#六、共享相关命令" class="headerlink" title="六、共享相关命令"></a><strong>六、共享相关命令</strong></h2><pre><code class="hljs dos"><span class="hljs-built_in">net</span> share #列出共享列表 
+<h2 id="8、辅助DNS服务器"><a href="#8、辅助DNS服务器" class="headerlink" title="8、辅助DNS服务器"></a><strong>8、辅助DNS服务器</strong></h2><h2 id="9、清除DNS缓存"><a href="#9、清除DNS缓存" class="headerlink" title="9、清除DNS缓存"></a><strong>9、清除DNS缓存</strong></h2><h3 id="9-1、客户机上清除缓存"><a href="#9-1、客户机上清除缓存" class="headerlink" title="9.1、客户机上清除缓存"></a><strong>9.1、客户机上清除缓存</strong></h3><h3 id="9-2、服务器上清除缓存"><a href="#9-2、服务器上清除缓存" class="headerlink" title="9.2、服务器上清除缓存"></a><strong>9.2、服务器上清除缓存</strong></h3><h2 id="10、域名解析记录类型："><a href="#10、域名解析记录类型：" class="headerlink" title="10、域名解析记录类型："></a><strong>10、域名解析记录类型：</strong></h2><pre><code class="hljs dns"><span class="hljs-keyword">A</span>记录： 正向解析记录
+<span class="hljs-keyword">CNAME</span>记录：别名
+<span class="hljs-keyword">PTR</span>记录：反向解析记录
+<span class="hljs-keyword">MX</span>：邮件交换记录
+nslookup 
+域名
+ipconfig /flushdns 
+windows服务器：dns工具--查看--高级，调出缓存来，然后右键清除缓存<span class="hljs-keyword">NS</span>：域名服务器解析</code></pre>
 
-<span class="hljs-built_in">net</span> share 共享名 /<span class="hljs-built_in">del</span> #删除共享</code></pre>
+<h2 id="11、反向DNS"><a href="#11、反向DNS" class="headerlink" title="11、反向DNS"></a><strong>11、反向DNS</strong></h2><pre><code class="hljs plain">nslookup手工解析时，会进行一个反向解析</code></pre>
 
-<h2 id="七、屏蔽系统隐藏共享自动产生"><a href="#七、屏蔽系统隐藏共享自动产生" class="headerlink" title="七、屏蔽系统隐藏共享自动产生"></a><strong>七、屏蔽系统隐藏共享自动产生</strong></h2><h3 id="6-1、打开注册表"><a href="#6-1、打开注册表" class="headerlink" title="6.1、打开注册表"></a><strong>6.1、打开注册表</strong></h3><pre><code class="hljs plain">打开注册表编辑器：regedit</code></pre>
+<h2 id="12、DNS服务器分类"><a href="#12、DNS服务器分类" class="headerlink" title="12、DNS服务器分类"></a><strong>12、DNS服务器分类</strong></h2><pre><code class="hljs plain">主要名称服务器
+辅助名称服务器
+根名称服务器
+高速缓存名称服务器</code></pre>
 
-<h3 id="6-2、定位共享注册表位置"><a href="#6-2、定位共享注册表位置" class="headerlink" title="6.2、定位共享注册表位置"></a><strong>6.2、定位共享注册表位置</strong></h3><pre><code class="hljs tex">HKEY_Local_MACHINE<span class="hljs-tag">\<span class="hljs-name">System</span></span><span class="hljs-tag">\<span class="hljs-name">CurrentControlSet</span></span><span class="hljs-tag">\<span class="hljs-name">Services</span></span><span class="hljs-tag">\<span class="hljs-name">LanmanServer</span></span><span class="hljs-tag">\<span class="hljs-name">Parameters</span></span><span class="hljs-tag">\</span>
+<h2 id="13、客户机域名请求解析顺序"><a href="#13、客户机域名请求解析顺序" class="headerlink" title="13、客户机域名请求解析顺序"></a><strong>13、客户机域名请求解析顺序</strong></h2><pre><code class="hljs angelscript"><span class="hljs-number">1.</span>DNS缓存---<span class="hljs-number">-2.</span>本地hosts文件-<span class="hljs-number">-3.</span>找本地DNS服务器</code></pre>
 
-### 右键新建REG_DWORD类型的AutoShareServer 键，值为 0</code></pre>
+<h3 id="14、服务器对域名请求的处理顺序"><a href="#14、服务器对域名请求的处理顺序" class="headerlink" title="14、服务器对域名请求的处理顺序"></a><strong>14、服务器对域名请求的处理顺序</strong></h3><pre><code class="hljs angelscript"><span class="hljs-number">1.</span>DNS高速缓存-<span class="hljs-number">-2.</span>本地区域解析文件-<span class="hljs-number">-3.</span>转发器-<span class="hljs-number">-4.</span>根</code></pre>
 
-<h2 id="八、查看本地网络连接状态"><a href="#八、查看本地网络连接状态" class="headerlink" title="八、查看本地网络连接状态"></a><strong>八、查看本地网络连接状态</strong></h2><pre><code class="hljs ebnf"><span class="hljs-attribute">netstat -an</span></code></pre>
-
-<h2 id="九、关445服务"><a href="#九、关445服务" class="headerlink" title="九、关445服务"></a><strong>九、关445服务</strong></h2><pre><code class="hljs angelscript">可以通过关闭<span class="hljs-number">445</span>端口来屏蔽病毒传入（如勒索病毒等）
-
-方法<span class="hljs-number">1</span>：打开services.msc，并停止及禁用server服务
-
-方法<span class="hljs-number">2</span>：禁止被访问<span class="hljs-number">445</span>，配置高级安全防火墙-入站规则（在win7及以上系统，win2008及以上系统）
-
-net share #列出共享列表 
-
-net share 共享名 /del #删除共享</code></pre>
-
+<p>实验内容</p>
+<p>1.主要DNS服务器: 员工要指向DNS，练习清空DNS缓存，练习nslookup手工解析</p>
+<p>2.反向解析</p>
+<p>3、辅助DNS服务器：成功更新区域解析记录1 </p>
+<p>4、.转发器/根 </p>
+<p>5、（选做）将xp与2003桥接能上网，部署2003位DNS服务器，xp指向2003，并能实现XP正常上网</p>
+<p>6、别名</p>
 
             </article>
             <hr>
@@ -307,18 +337,12 @@ net share 共享名 /del #删除共享</code></pre>
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/04/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A812/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">DNS服务器部署</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/06/21/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A811/">
-                        <span class="hidden-mobile">部署DHCP安全</span>
+                      <a href="/2020/06/21/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A810/">
+                        <span class="hidden-mobile">文件共享服务器</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -485,7 +509,7 @@ net share 共享名 /del #删除共享</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "文件共享服务器&nbsp;",
+        "DNS服务器部署&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
