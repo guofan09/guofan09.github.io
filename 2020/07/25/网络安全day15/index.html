@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>DNS服务器部署 - 浮生一梦</title>
+  <title>VLAN - 浮生一梦</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-07-04 19:00">
-      July 4, 2020 pm
+    <time datetime="2020-07-25 00:00">
+      July 25, 2020 am
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      895 字
+      94 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      1
        分钟
     </span>
   
@@ -224,87 +224,15 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="1、DNS"><a href="#1、DNS" class="headerlink" title="1、DNS"></a>1、DNS</h2><pre><code class="hljs routeros">Domain Name Service
-域名服务
-作用：为客户机提供域名解析服务器</code></pre>
-
-<h2 id="2、域名组成"><a href="#2、域名组成" class="headerlink" title="2、域名组成"></a><strong>2、域名组成</strong></h2><h3 id="2-1、域名组成概述"><a href="#2-1、域名组成概述" class="headerlink" title="2.1、域名组成概述"></a><strong>2.1、域名组成概述</strong></h3><pre><code class="hljs css">如"<span class="hljs-selector-tag">www</span><span class="hljs-selector-class">.sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>"是一个域名，从严格意义上讲，"<span class="hljs-selector-tag">sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>"才被称为域名(全球唯一)，而"<span class="hljs-selector-tag">www</span>"是主机
-名。
-"主机名.域名"称为完全限定域名(<span class="hljs-selector-tag">FQDN</span>)。一个域名下可以有多个主机，域名全球唯一，那么"主机名.域名"肯定也
-是全球唯一的。
-以"<span class="hljs-selector-tag">sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>"域名为例，一般管理员在命名其主机的时候会根据其主机的功能而命名，比如网站的是<span class="hljs-selector-tag">www</span>，博
-客的是<span class="hljs-selector-tag">blog</span>，论坛的是<span class="hljs-selector-tag">bbs</span>，那么对应的<span class="hljs-selector-tag">FQDN</span>为<span class="hljs-selector-tag">www</span><span class="hljs-selector-class">.sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>，<span class="hljs-selector-tag">blog</span><span class="hljs-selector-class">.sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>，<span class="hljs-selector-tag">bbs</span><span class="hljs-selector-class">.sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>。这么多个<span class="hljs-selector-tag">FQDN</span>，然而我们只需要申请一个域名即"<span class="hljs-selector-tag">sina</span><span class="hljs-selector-class">.com</span><span class="hljs-selector-class">.cn</span>"即可。</code></pre>
-
-<h3 id="2-2、域名组成"><a href="#2-2、域名组成" class="headerlink" title="2.2、域名组成"></a><strong>2.2、域名组成</strong></h3><p><strong>树形结构</strong></p>
-<p>根域 . </p>
-<p><img src="/wenzhang/Netimg/04.png" srcset="/img/loading.gif" alt=""></p>
-<pre><code class="hljs properties"><span class="hljs-attr">顶级域</span>
-<span class="hljs-meta">国家顶级域</span> <span class="hljs-string">cn jp hk uk</span>
-<span class="hljs-meta">商业顶级域</span> <span class="hljs-string">com 商业机构</span>
- <span class="hljs-attr">gov</span> <span class="hljs-string">政府机构</span>
- <span class="hljs-attr">mil</span> <span class="hljs-string">军事机构</span>
- <span class="hljs-attr">edu</span> <span class="hljs-string"></span>
-<span class="hljs-attr">教育机构</span>
- <span class="hljs-attr">org</span> <span class="hljs-string">民间组织架构</span>
- <span class="hljs-attr">net</span> <span class="hljs-string">互联网</span>
- <span class="hljs-attr">一级域名</span>
- <span class="hljs-attr">二级域名</span>
-<span class="hljs-attr">。。。。</span></code></pre>
-
-<h2 id="3、监听端口："><a href="#3、监听端口：" class="headerlink" title="3、监听端口："></a>3、监听端口：</h2><p>TCP53<br>UDP53 </p>
-<h2 id="4、DNS解析种类"><a href="#4、DNS解析种类" class="headerlink" title="4、DNS解析种类"></a><strong>4、DNS解析种类</strong></h2><h3 id="4-1、按照查询方式分类："><a href="#4-1、按照查询方式分类：" class="headerlink" title="4.1、按照查询方式分类："></a><strong>4.1、按照查询方式分类：</strong></h3><pre><code class="hljs armasm">如：www.<span class="hljs-keyword">baidu.com. </span>
-<span class="hljs-number">1</span>.为根域
-<span class="hljs-symbol">.com</span>为顶级域 
-<span class="hljs-keyword">baidu为一级域名 </span>
-<span class="hljs-symbol">www</span>为主机名 
-<span class="hljs-symbol">FQDN</span>=主机名.DNS后缀 
-<span class="hljs-symbol">FQDN</span>（完整合格的域名）</code></pre>
-
-<p>1）递归查询：客户机与本地DNS服务器之间 </p>
-<p>2）迭代查询：本地DNS服务器与根等其他DNS服务器的解析过程</p>
-<h3 id="4-2、按照查询内容分类："><a href="#4-2、按照查询内容分类：" class="headerlink" title="4.2、按照查询内容分类："></a><strong>4.2、按照查询内容分类：</strong></h3><p> 1）正向解析：已知域名，解析IP地址</p>
-<p> 2）反向解析：已知IP地址，解析域名</p>
-<h2 id="5、DNS服务器搭建过程"><a href="#5、DNS服务器搭建过程" class="headerlink" title="5、DNS服务器搭建过程"></a><strong>5、DNS服务器搭建过程</strong></h2><pre><code class="hljs angelscript"> <span class="hljs-number">1</span>）要求网卡IP是静态IP地址。
- <span class="hljs-number">2</span>）安装DNS服务器插件（也就是安装并开启TCP及UDP53端口）
- <span class="hljs-number">3</span>）创建区域文件（负责一个域名后缀的解析，如baidu.com为域名后缀，一台DNS服务器内可存放多个区域文
-件）
- <span class="hljs-number">4</span>）新建A记录</code></pre>
-
-<h2 id="6、DNS客户机如何解析"><a href="#6、DNS客户机如何解析" class="headerlink" title="6、DNS客户机如何解析"></a><strong>6、DNS客户机如何解析</strong></h2><pre><code class="hljs angelscript"><span class="hljs-number">1</span>）指向DNS
-<span class="hljs-number">2</span>）手工解析域名：
-nslookup 域名 服务器处理域名请求的顺序
-<span class="hljs-number">1</span>）DNS高速缓存（必须学会如何查看及清空）
-<span class="hljs-number">2</span>）DNS区域配置文件
-<span class="hljs-number">3</span>）DNS转发器
-<span class="hljs-number">4</span>）根提示</code></pre>
-
-<h2 id="8、辅助DNS服务器"><a href="#8、辅助DNS服务器" class="headerlink" title="8、辅助DNS服务器"></a><strong>8、辅助DNS服务器</strong></h2><h2 id="9、清除DNS缓存"><a href="#9、清除DNS缓存" class="headerlink" title="9、清除DNS缓存"></a><strong>9、清除DNS缓存</strong></h2><h3 id="9-1、客户机上清除缓存"><a href="#9-1、客户机上清除缓存" class="headerlink" title="9.1、客户机上清除缓存"></a><strong>9.1、客户机上清除缓存</strong></h3><h3 id="9-2、服务器上清除缓存"><a href="#9-2、服务器上清除缓存" class="headerlink" title="9.2、服务器上清除缓存"></a><strong>9.2、服务器上清除缓存</strong></h3><h2 id="10、域名解析记录类型："><a href="#10、域名解析记录类型：" class="headerlink" title="10、域名解析记录类型："></a><strong>10、域名解析记录类型：</strong></h2><pre><code class="hljs dns"><span class="hljs-keyword">A</span>记录： 正向解析记录
-<span class="hljs-keyword">CNAME</span>记录：别名
-<span class="hljs-keyword">PTR</span>记录：反向解析记录
-<span class="hljs-keyword">MX</span>：邮件交换记录
-nslookup 
-域名
-ipconfig /flushdns 
-windows服务器：dns工具--查看--高级，调出缓存来，然后右键清除缓存<span class="hljs-keyword">NS</span>：域名服务器解析</code></pre>
-
-<h2 id="11、反向DNS"><a href="#11、反向DNS" class="headerlink" title="11、反向DNS"></a><strong>11、反向DNS</strong></h2><pre><code class="hljs plain">nslookup手工解析时，会进行一个反向解析</code></pre>
-
-<h2 id="12、DNS服务器分类"><a href="#12、DNS服务器分类" class="headerlink" title="12、DNS服务器分类"></a><strong>12、DNS服务器分类</strong></h2><pre><code class="hljs plain">主要名称服务器
-辅助名称服务器
-根名称服务器
-高速缓存名称服务器</code></pre>
-
-<h2 id="13、客户机域名请求解析顺序"><a href="#13、客户机域名请求解析顺序" class="headerlink" title="13、客户机域名请求解析顺序"></a><strong>13、客户机域名请求解析顺序</strong></h2><pre><code class="hljs angelscript"><span class="hljs-number">1.</span>DNS缓存---<span class="hljs-number">-2.</span>本地hosts文件-<span class="hljs-number">-3.</span>找本地DNS服务器</code></pre>
-
-<h3 id="14、服务器对域名请求的处理顺序"><a href="#14、服务器对域名请求的处理顺序" class="headerlink" title="14、服务器对域名请求的处理顺序"></a><strong>14、服务器对域名请求的处理顺序</strong></h3><pre><code class="hljs angelscript"><span class="hljs-number">1.</span>DNS高速缓存-<span class="hljs-number">-2.</span>本地区域解析文件-<span class="hljs-number">-3.</span>转发器-<span class="hljs-number">-4.</span>根</code></pre>
-
-<p>实验内容</p>
-<p>1.主要DNS服务器: 员工要指向DNS，练习清空DNS缓存，练习nslookup手工解析</p>
-<p>2.反向解析</p>
-<p>3、辅助DNS服务器：成功更新区域解析记录1 </p>
-<p>4、.转发器/根 </p>
-<p>5、（选做）将xp与2003桥接能上网，部署2003位DNS服务器，xp指向2003，并能实现XP正常上网</p>
-<p>6、别名</p>
+              <p>5.һ��VLAN=һ���㲥��=һ������<br>  VLAN�Ƕ��㼼��</p>
+<p>7.��̬VLAN���<br>1������VLAN��<br>conf t<br>  vlan ID,ID,ID-ID<br>    [name  �Զ�������]<br>    exit</p>
+<p>2���鿴VLAN����<br>  show vlan b</p>
+<p>3�����˿ڼ��뵽VLAN��<br>  int  f0/x<br>    switchport  access  vlan  ID<br>    exit</p>
+<p>����trunk<br>1.trunk/�м���·/������·<br>���ã���������VLAN����ͨ��trunk��·<br>������ͨ��������֡�ϼӱ�ǩ�������ֲ�ͬ��vlan������</p>
+<p>2.trunk��ǩ��<br>1��ISL��ǩ��cisco˽�еģ���ǩ��С30�ֽ�26+4<br>2��802.1q��ǩ������Э�飬���г��Ҷ�֧�֣���ǩ��С4�ֽڡ������ڲ���ǩ��</p>
+<p>3.�������˿���·���ͣ�<br>1������˿ڣ�Ҳ��Ϊaccess�˿ڣ�һ����������pc��ֻ������ĳ1��vlan,Ҳֻ�ܴ���1��vlan������<br>2���м̶˿ڣ�Ҳ��Ϊtrunk�˿�,һ�������������������������ڹ����˿ڣ���������vlan������ͨ����</p>
+<p>4.����trunk���<br>  int f0/x<br>    [switchport trunk encapsulation dot1q/isl]<br>    switchport mode trunk<br>    exit</p>
+<p>�ģ��������Ĺ���ԭ����������vlan��trunk�󣩣�<br>������</p>
 
             </article>
             <hr>
@@ -314,7 +242,7 @@ windows服务器：dns工具--查看--高级，调出缓存来，然后右键清
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+                      <a class="hover-with-bg" href="/categories/%EF%BF%BD%EF%BF%BD%EF%BF%BD%E7%B0%B2o/">���簲ȫ</a>
                     
                   </div>
                 
@@ -322,9 +250,9 @@ windows服务器：dns工具--查看--高级，调出缓存来，然后右键清
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+                      <a class="hover-with-bg" href="/tags/%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD/">����</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
+                      <a class="hover-with-bg" href="/tags/%EF%BF%BD%EF%BF%BDo/">��ȫ</a>
                     
                   </div>
                 
@@ -337,18 +265,12 @@ windows服务器：dns工具--查看--高级，调出缓存来，然后右键清
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/04/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day06/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">WEB服务器和FTP服务器</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/06/21/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A810/">
-                        <span class="hidden-mobile">文件共享服务器</span>
+                      <a href="/2020/07/25/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day14/">
+                        <span class="hidden-mobile">ARPЭ��</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -515,7 +437,7 @@ windows服务器：dns工具--查看--高级，调出缓存来，然后右键清
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "DNS服务器部署&nbsp;",
+        "VLAN&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
