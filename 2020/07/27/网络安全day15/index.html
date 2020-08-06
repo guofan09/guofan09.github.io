@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      94 字
+      347 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      4
        分钟
     </span>
   
@@ -224,15 +224,22 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>5.һ��VLAN=һ���㲥��=һ������<br>  VLAN�Ƕ��㼼��</p>
-<p>7.��̬VLAN���<br>1������VLAN��<br>conf t<br>  vlan ID,ID,ID-ID<br>    [name  �Զ�������]<br>    exit</p>
-<p>2���鿴VLAN���<br>  show vlan b</p>
-<p>3�����˿ڼ��뵽VLAN��<br>  int  f0/x<br>    switchport  access  vlan  ID<br>    exit</p>
-<p>����trunk<br>1.trunk/�м���·/������·<br>���ã���������VLAN����ͨ��trunk��·<br>������ͨ��������֡�ϼӱ�ǩ�������ֲ�ͬ��vlan������</p>
-<p>2.trunk��ǩ��<br>1��ISL��ǩ��cisco˽�еģ���ǩ��С30�ֽ�26+4<br>2��802.1q��ǩ������Э�飬���г��Ҷ�֧�֣���ǩ��С4�ֽڡ������ڲ���ǩ��</p>
-<p>3.�������˿���·���ͣ�<br>1������˿ڣ�Ҳ��Ϊaccess�˿ڣ�һ����������pc��ֻ������ĳ1��vlan,Ҳֻ�ܴ���1��vlan������<br>2���м̶˿ڣ�Ҳ��Ϊtrunk�˿�,һ�������������������������ڹ����˿ڣ���������vlan������ͨ����</p>
-<p>4.����trunk���<br>  int f0/x<br>    [switchport trunk encapsulation dot1q/isl]<br>    switchport mode trunk<br>    exit</p>
-<p>�ģ��������Ĺ���ԭ���������vlan��trunk�󣩣�<br>������</p>
+              <h2 id="VLAN-虚拟局域网"><a href="#VLAN-虚拟局域网" class="headerlink" title="VLAN(虚拟局域网)"></a>VLAN(虚拟局域网)</h2><p>1.广播/广播域</p>
+<p>2.广播的危害：增加网络/终端负担，传播病毒/安全性</p>
+<p>3，如何控制广播？</p>
+<p>控制广播=隔离广播域（物理隔离广播）</p>
+<ol start="4">
+<li>vlan作用 控制广播 逻辑隔离广播域</li>
+</ol>
+<p>5.一个VLAN=一个广播域=一个网段<br>  VLAN是二层技术</p>
+<p>7.静态VLAN命令：<br>1）创建VLAN：<br>conf t<br>  vlan ID,ID,ID-ID<br>    [name  自定义名称]<br>    exit</p>
+<p>2）查看VLAN表：<br>  show vlan b</p>
+<p>3）将端口加入到VLAN：<br>  int  f0/x<br>    switchport  access  vlan  ID<br>    exit</p>
+<h2 id="二、trunk"><a href="#二、trunk" class="headerlink" title="二、trunk"></a>二、trunk</h2><p>1.trunk/中继链路/公共链路<br>作用：允许所有VLAN数据通过trunk链路<br>方法：通过在数据帧上加标签，来区分不同的vlan的数据</p>
+<p>2.trunk标签：<br>1）ISL标签：cisco私有的，标签大小30字节26+4<br>2）802.1q标签：公有协议，所有厂家都支持，标签大小4字节。属于内部标签。</p>
+<p>3.交换机端口链路类型：<br>1）接入端口：也称为access端口，一般用于连接pc，只能属于某1个vlan,也只能传输1个vlan的数据<br>2）中继端口：也称为trunk端口,一般用于连接其他交换机，属于公共端口，允许所有vlan的数据通过！</p>
+<p>4.配置trunk命令：<br>  int f0/x<br>    [switchport trunk encapsulation dot1q/isl]<br>    switchport mode trunk<br>    exit</p>
+<p>三：交换机的工作原理（配置了vlan和trunk后）：<br>分析：</p>
 
             </article>
             <hr>
@@ -242,7 +249,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%EF%BF%BD%EF%BF%BD%EF%BF%BD%E7%B0%B2o/">���簲ȫ</a>
+                      <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
                     
                   </div>
                 
@@ -250,9 +257,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD/">����</a>
+                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
                     
-                      <a class="hover-with-bg" href="/tags/%EF%BF%BD%EF%BF%BDo/">��ȫ</a>
+                      <a class="hover-with-bg" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
                     
                   </div>
                 
@@ -270,7 +277,7 @@
                     
                     
                       <a href="/2020/07/26/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day14/">
-                        <span class="hidden-mobile">ARPЭ��</span>
+                        <span class="hidden-mobile">ARP</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>ARPЭ�� - 浮生一梦</title>
+  <title>ARP - 浮生一梦</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      182 字
+      685 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      8
        分钟
     </span>
   
@@ -224,20 +224,20 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="�㲥��㲥��"><a href="#�㲥��㲥��" class="headerlink" title="�㲥��㲥��"></a>�㲥��㲥��</h2><p>�㲥�����㲥��ַ��ΪĿ�ĵ�ַ������֡<br>�㲥���������ܽ��յ�ͬһ���㲥���нڵ�ļ���</p>
-<p>MAC��ַ�㲥<br>�㲥��ַΪFF-FF-FF-FF-FF-FF</p>
-<p>IP��ַ�㲥<br>1��255.255.255.255<br>2���㲥IP��ַΪIP��ַ���εĹ㲥��ַ����192.168.1.255/24</p>
-<h2 id="ARPЭ��"><a href="#ARPЭ��" class="headerlink" title="ARPЭ��"></a>ARPЭ��</h2><p>烦烦烦<br>1.��ַ����Э��<br>2.���ã���IP����ΪMAC��ַ<br>3.ԭ���1������ARP�㲥����<br>    ARP��������:����10.1.1.1 �ҵ�mac��AA<br>                    ˭��10.1.1.3 ���mac����<br>        2������ARP����Ӧ��<br>4.ARP��������ƭ��ԭ���ǣ�<br>  ͨ������α����ٵ�ARP���ģ��㲥�򵥲�������ʵ�ֵĹ�������ƭ��<br>  ����ٱ��ĵ�mac��α��Ĳ����ڵģ�ʵ��ARP���������Ϊ�ж�ͨ��/������<br>  ����ٱ��ĵ�mac�ǹ����������mac��ַ��ʵ��ARP��ƭ��������Լ�������ȡ���۸ġ����������������ж�ͨ�ţ�</p>
-<p>5.ARPЭ��û����֤���ƣ��������ױ�arpͶ������</p>
-<p>6.ARP������ͨ���������α���arp���Ķ��ܺ��߽���ARP����Ͷ��</p>
-<h2 id="·�����L���ԭ��"><a href="#·�����L���ԭ��" class="headerlink" title="·�����Ĺ���ԭ��"></a>·�����Ĺ���ԭ��</h2><p>1��һ��֡����·�ɣ�·�������ȼ��Ŀ��MAC��ַ�Ƿ��Լ�������������������������װ������IP���͵�·�����ڲ�</p>
-<p>2��·�������IP��ͷ�е�Ŀ��IP����ƥ��·�ɱ�����ƥ��ʧ�ܣ�����������ԴIP����������Ϣ����ƥ��ɹ�����IP��·�ɵ����ӿڡ�</p>
-<p>3����װ֡�����Ƚ����ӿڵ�MAC��ַ��ΪԴMAC��װ�ã�Ȼ����ARP����������Ƿ�����һ����MAC��ַ�����У�����ȡ����ΪĿ��MAC��ַ��װ��֡�У���û�У�����ARP�㲥������һ����MAC������ȡ���Է���mac��ַ���ټ�¼���棬����װ֡�����֡���ͳ�ȥ��</p>
-<p>8.�����˾��������ARP��ƭ��������ҵ����ˣ�</p>
-<h2 id="ARP��������"><a href="#ARP��������" class="headerlink" title="ARP��������"></a>ARP��������</h2><p>1.��̬ARP��<br>  �ֹ���/˫���<br>  windows�ͻ����ϣ�<br>  arp -s 10.1.1.254  00-01-2c-a0-e1-09<br>  arp -a  �鿴ARP�����<br>  ·�����Ͼ�̬�󶨣�<br>Router(config)#arp 10.0.0.95 0013.240a.b219 arpa f0/0<br>�ŵ㣺���ü�<br>ȱ�㣺��������ά������</p>
-<p>2.ARP����ǽ<br>  �Զ��󶨾�̬ARP<br>  ��������<br>  �ŵ㣺������<br>  ȱ�㣺�����������϶�ʱ�����������縺��</p>
-<p>3.Ӳ����ARP������<br>  ������֧�֡��˿ڡ�����̬ARP�󶨣����DHCP��������<br>  ������̬ARP��</p>
-<p>  �磺<br>  conf t<br>  ip dhcp snooping<br>  int range f0/1 - 48<br>  switch(config-range-if)#</p>
+              <h2 id="广播与广播域"><a href="#广播与广播域" class="headerlink" title="广播与广播域"></a>广播与广播域</h2><p>广播：将广播地址做为目的地址的数据帧<br>广播域：网络中能接收到同一个广播所有节点的集合</p>
+<p>MAC地址广播<br>广播地址为FF-FF-FF-FF-FF-FF</p>
+<p>IP地址广播<br>1）255.255.255.255<br>2）广播IP地址为IP地址网段的广播地址，如192.168.1.255/24</p>
+<p>=========================================================</p>
+<h2 id="ARP协议讲解："><a href="#ARP协议讲解：" class="headerlink" title="ARP协议讲解："></a>ARP协议讲解：</h2><p>1.地址解析协议<br>2.作用：将IP解析为MAC地址<br>3.原理：1）发送ARP广播请求<br>    ARP报文内容:我是10.1.1.1 我的mac：AA<br>                    谁是10.1.1.3 你的mac：？<br>        2）接收ARP单播应答<br>4.ARP攻击或欺骗的原理是：<br>  通过发送伪造虚假的ARP报文（广播或单播），来实现的攻击或欺骗！<br>  如虚假报文的mac是伪造的不存在的，实现ARP攻击，结果为中断通信/断网！<br>  如虚假报文的mac是攻击者自身的mac地址，实现ARP欺骗，结果可以监听、窃取、篡改、控制流量，但不中断通信！</p>
+<p>5.ARP协议没有验证机制，所以容易被arp投毒攻击</p>
+<p>6.ARP攻击者通过发送虚假伪造的arp报文对受害者进行ARP缓存投毒</p>
+<p>7.路由器的工作原理<br>1）一个帧到达路由，路由器首先检查目标MAC地址是否自己，如果不是则丢弃，如果是则解封装，并将IP包送到路由器内部</p>
+<p>2）路由器检查IP包头中的目标IP，并匹配路由表，如果匹配失败，则丢弃，并向源IP回馈错误信息，如匹配成功，则将IP包路由到出接口。</p>
+<p>3）封装帧，首先将出接口的MAC地址作为源MAC封装好，然后检查ARP缓存表，检查是否有下一跳的MAC地址，如有，将提取并作为目标MAC地址封装到帧中，如没有，则发送ARP广播请求下一跳的MAC，并获取到对方的mac地址，再记录缓存，并封装帧，最后将帧发送出去。</p>
+<h2 id="ARP攻击防御："><a href="#ARP攻击防御：" class="headerlink" title="ARP攻击防御："></a>ARP攻击防御：</h2><h3 id="1-静态ARP绑定"><a href="#1-静态ARP绑定" class="headerlink" title="1.静态ARP绑定"></a>1.静态ARP绑定</h3><p>  手工绑定/双向绑定<br>  windows客户机上：<br>  arp -s 10.1.1.254  00-01-2c-a0-e1-09<br>  arp -a  查看ARP缓存表<br>  路由器上静态绑定：<br>Router(config)#arp 10.0.0.95 0013.240a.b219 arpa f0/0<br>优点：配置简单<br>缺点：工作量大，维护量大</p>
+<h3 id="2-ARP防火墙"><a href="#2-ARP防火墙" class="headerlink" title="2.ARP防火墙"></a>2.ARP防火墙</h3><p>  自动绑定静态ARP<br>  主动防御<br>  优点：简单易用<br>  缺点：当开启人数较多时，会增大网络负担</p>
+<h3 id="3-硬件级ARP防御："><a href="#3-硬件级ARP防御：" class="headerlink" title="3.硬件级ARP防御："></a>3.硬件级ARP防御：</h3><p>  交换机支持“端口”做动态ARP绑定（配合DHCP服务器）<br>  或做静态ARP绑定</p>
+<p>  如：<br>  conf t<br>  ip dhcp snooping<br>  int range f0/1 - 48<br>  switch(config-range-if)#</p>
 
             </article>
             <hr>
@@ -247,7 +247,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%EF%BF%BD%EF%BF%BD%EF%BF%BD%E7%B0%B2o/">���簲ȫ</a>
+                      <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
                     
                   </div>
                 
@@ -255,9 +255,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD/">����</a>
+                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
                     
-                      <a class="hover-with-bg" href="/tags/%EF%BF%BD%EF%BF%BDo/">��ȫ</a>
+                      <a class="hover-with-bg" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
                     
                   </div>
                 
@@ -448,7 +448,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "ARPЭ��&nbsp;",
+        "ARP&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
