@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>VLAN - 浮生一梦</title>
+  <title>ARPЭ�� - 浮生一梦</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-07-25 00:00">
-      July 25, 2020 am
+    <time datetime="2020-07-26 00:00">
+      July 26, 2020 am
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      94 字
+      179 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      3
        分钟
     </span>
   
@@ -224,15 +224,20 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>5.һ��VLAN=һ���㲥��=һ������<br>  VLAN�Ƕ��㼼��</p>
-<p>7.��̬VLAN���<br>1������VLAN��<br>conf t<br>  vlan ID,ID,ID-ID<br>    [name  �Զ�������]<br>    exit</p>
-<p>2���鿴VLAN����<br>  show vlan b</p>
-<p>3�����˿ڼ��뵽VLAN��<br>  int  f0/x<br>    switchport  access  vlan  ID<br>    exit</p>
-<p>����trunk<br>1.trunk/�м���·/������·<br>���ã���������VLAN����ͨ��trunk��·<br>������ͨ��������֡�ϼӱ�ǩ�������ֲ�ͬ��vlan������</p>
-<p>2.trunk��ǩ��<br>1��ISL��ǩ��cisco˽�еģ���ǩ��С30�ֽ�26+4<br>2��802.1q��ǩ������Э�飬���г��Ҷ�֧�֣���ǩ��С4�ֽڡ������ڲ���ǩ��</p>
-<p>3.�������˿���·���ͣ�<br>1������˿ڣ�Ҳ��Ϊaccess�˿ڣ�һ����������pc��ֻ������ĳ1��vlan,Ҳֻ�ܴ���1��vlan������<br>2���м̶˿ڣ�Ҳ��Ϊtrunk�˿�,һ�������������������������ڹ����˿ڣ���������vlan������ͨ����</p>
-<p>4.����trunk���<br>  int f0/x<br>    [switchport trunk encapsulation dot1q/isl]<br>    switchport mode trunk<br>    exit</p>
-<p>�ģ��������Ĺ���ԭ����������vlan��trunk�󣩣�<br>������</p>
+              <h2 id="�㲥��㲥��"><a href="#�㲥��㲥��" class="headerlink" title="�㲥��㲥��"></a>�㲥��㲥��</h2><p>�㲥�����㲥��ַ��ΪĿ�ĵ�ַ������֡<br>�㲥���������ܽ��յ�ͬһ���㲥���нڵ�ļ���</p>
+<p>MAC��ַ�㲥<br>�㲥��ַΪFF-FF-FF-FF-FF-FF</p>
+<p>IP��ַ�㲥<br>1��255.255.255.255<br>2���㲥IP��ַΪIP��ַ���εĹ㲥��ַ����192.168.1.255/24</p>
+<h2 id="ARPЭ��"><a href="#ARPЭ��" class="headerlink" title="ARPЭ��"></a>ARPЭ��</h2><p>1.��ַ����Э��<br>2.���ã���IP����ΪMAC��ַ<br>3.ԭ���1������ARP�㲥����<br>    ARP��������:����10.1.1.1 �ҵ�mac��AA<br>                    ˭��10.1.1.3 ���mac����<br>        2������ARP����Ӧ��<br>4.ARP��������ƭ��ԭ���ǣ�<br>  ͨ������α����ٵ�ARP���ģ��㲥�򵥲�������ʵ�ֵĹ�������ƭ��<br>  ����ٱ��ĵ�mac��α��Ĳ����ڵģ�ʵ��ARP���������Ϊ�ж�ͨ��/������<br>  ����ٱ��ĵ�mac�ǹ����������mac��ַ��ʵ��ARP��ƭ��������Լ�������ȡ���۸ġ����������������ж�ͨ�ţ�</p>
+<p>5.ARPЭ��û����֤���ƣ��������ױ�arpͶ������</p>
+<p>6.ARP������ͨ���������α���arp���Ķ��ܺ��߽���ARP����Ͷ��</p>
+<h2 id="·�����L���ԭ��"><a href="#·�����L���ԭ��" class="headerlink" title="·�����Ĺ���ԭ��"></a>·�����Ĺ���ԭ��</h2><p>1��һ��֡����·�ɣ�·�������ȼ��Ŀ��MAC��ַ�Ƿ��Լ�������������������������װ������IP���͵�·�����ڲ�</p>
+<p>2��·�������IP��ͷ�е�Ŀ��IP����ƥ��·�ɱ�����ƥ��ʧ�ܣ�����������ԴIP����������Ϣ����ƥ��ɹ�����IP��·�ɵ����ӿڡ�</p>
+<p>3����װ֡�����Ƚ����ӿڵ�MAC��ַ��ΪԴMAC��װ�ã�Ȼ����ARP����������Ƿ�����һ����MAC��ַ�����У�����ȡ����ΪĿ��MAC��ַ��װ��֡�У���û�У�����ARP�㲥������һ����MAC������ȡ���Է���mac��ַ���ټ�¼���棬����װ֡�����֡���ͳ�ȥ��</p>
+<p>8.�����˾��������ARP��ƭ��������ҵ����ˣ�</p>
+<h2 id="ARP��������"><a href="#ARP��������" class="headerlink" title="ARP��������"></a>ARP��������</h2><p>1.��̬ARP��<br>  �ֹ���/˫���<br>  windows�ͻ����ϣ�<br>  arp -s 10.1.1.254  00-01-2c-a0-e1-09<br>  arp -a  �鿴ARP�����<br>  ·�����Ͼ�̬�󶨣�<br>Router(config)#arp 10.0.0.95 0013.240a.b219 arpa f0/0<br>�ŵ㣺���ü�<br>ȱ�㣺��������ά������</p>
+<p>2.ARP����ǽ<br>  �Զ��󶨾�̬ARP<br>  ��������<br>  �ŵ㣺������<br>  ȱ�㣺�����������϶�ʱ�����������縺��</p>
+<p>3.Ӳ����ARP������<br>  ������֧�֡��˿ڡ�����̬ARP�󶨣����DHCP��������<br>  ������̬ARP��</p>
+<p>  �磺<br>  conf t<br>  ip dhcp snooping<br>  int range f0/1 - 48<br>  switch(config-range-if)#</p>
 
             </article>
             <hr>
@@ -265,9 +270,9 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/25/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day14/">
+                      <a href="/2020/07/27/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day15/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ARPЭ��</span>
+                        <span class="hidden-mobile">VLAN</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -443,7 +448,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "VLAN&nbsp;",
+        "ARPЭ��&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
