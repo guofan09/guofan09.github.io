@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>三层交换机 - 浮生一梦</title>
+  <title>HSRP热备份路由协议 - 浮生一梦</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-01 00:00">
-      August 1, 2020 am
+    <time datetime="2020-08-09 00:00">
+      August 9, 2020 am
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      171 字
+      280 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      3
        分钟
     </span>
   
@@ -224,10 +224,33 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>三层交换机：<br>1.三层交换机 = 三层路由+二层交换机<br>2.三层路由引擎是可以关闭或开启的<br>  conf t<br>  ip routing   开启三层路由功能<br>  no ip routing  关闭三层路由功能<br>3.三层交换机的优点：<br>  与单臂路由相比：<br>  1）解决了网络瓶颈问题<br>  2）解决了单点故障（虚拟接口不再依赖任何的物理接口）<br>  3）一次路由，永久交换</p>
-<p>4.三层交换机上起虚接口（配置VLAN的网关）<br>  int vlan 10<br>    ip  add  10.1.1.254  255.255.255.0<br>    no shut<br>    exit</p>
-<p>5.二层端口升级为三层端口<br>  int f0/x<br>    no switchport<br>    ip add …<br>    no shut</p>
-<p><img src="E:%5Cguofan_Blog%5CMyBlog%5Cthemes%5Cfluid%5Csource%5Cwenzhang%5CNetimg%5Cwps3.jpg" srcset="/img/loading.gif" alt=""></p>
+              <p>HSRP协议（热备份路由协议）</p>
+<p>此协议作用：</p>
+<p>在网关接口失效情况下导致不能上网 快速启用备份网关   不用重新手动配置 无需重启设备</p>
+<p><img src="/wenzhang/Netmig/day1701.png" srcset="/img/loading.gif" alt=""></p>
+<p>给路由器配置热备份</p>
+<p>1.HSRP组号：1-255 没有大小之分</p>
+<p>int fx/x</p>
+<p>standby 1 ip 192.168.1.254(虚拟ip)</p>
+<p>2.虚拟路由器IP称为虚拟ip地址</p>
+<p>3.HSRP组的成员</p>
+<p>1）虚拟路由器（老大）</p>
+<p>2）活跃路由器</p>
+<p>3）备份路由器</p>
+<p>4）其他路由器</p>
+<p>4.HSRP优先级 1-255</p>
+<p>默认为100</p>
+<p>standby 1 priority 200</p>
+<p>5.HSRP 组员通过定时发送hello包来交流，默认每隔三秒</p>
+<p>hello时间三秒 坚持时间10秒</p>
+<p>6 占先权preempt</p>
+<p>当备份路由器 检测不到对方 收不到对方的消息， 或者检测到对放的优先级低于自己时</p>
+<p>就会立即抢占活跃的名分。</p>
+<p>standby 1 preempt</p>
+<p>7 配置跟踪track, 跟踪外网端口状态，当外网断掉时，则活跃路由自降优先级</p>
+<p>standby 1 track fx/x</p>
+<p>8 查看接口状态</p>
+<p>do show standy br</p>
 
             </article>
             <hr>
@@ -264,8 +287,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/27/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day15/">
-                        <span class="hidden-mobile">VLAN</span>
+                      <a href="/2020/08/01/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day16/">
+                        <span class="hidden-mobile">三层交换机</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -432,7 +455,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "三层交换机&nbsp;",
+        "HSRP热备份路由协议&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
