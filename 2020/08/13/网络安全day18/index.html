@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>HSRP热备份路由协议 - 浮生一梦</title>
+  <title>ACL - 浮生一梦</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-09 00:00">
-      August 9, 2020 am
+    <time datetime="2020-08-13 00:00">
+      August 13, 2020 am
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      280 字
+      344 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      6
        分钟
     </span>
   
@@ -224,33 +224,47 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>HSRP协议（热备份路由协议）</p>
-<p>此协议作用：</p>
-<p>在网关接口失效情况下导致不能上网 快速启用备份网关   不用重新手动配置 无需重启设备</p>
-<p><img src="/wenzhang/Netmig/day1701.png" srcset="/img/loading.gif" alt=""></p>
-<p>给路由器配置热备份</p>
-<p>1.HSRP组号：1-255 没有大小之分</p>
-<p>int fx/x</p>
-<p>standby 1 ip 192.168.1.254(虚拟ip)</p>
-<p>2.虚拟路由器IP称为虚拟ip地址</p>
-<p>3.HSRP组的成员</p>
-<p>1）虚拟路由器（老大）</p>
-<p>2）活跃路由器</p>
-<p>3）备份路由器</p>
-<p>4）其他路由器</p>
-<p>4.HSRP优先级 1-255</p>
-<p>默认为100</p>
-<p>standby 1 priority 200</p>
-<p>5.HSRP 组员通过定时发送hello包来交流，默认每隔三秒</p>
-<p>hello时间三秒 坚持时间10秒</p>
-<p>6 占先权preempt</p>
-<p>当备份路由器 检测不到对方 收不到对方的消息， 或者检测到对放的优先级低于自己时</p>
-<p>就会立即抢占活跃的名分。</p>
-<p>standby 1 preempt</p>
-<p>7 配置跟踪track, 跟踪外网端口状态，当外网断掉时，则活跃路由自降优先级</p>
-<p>standby 1 track fx/x</p>
-<p>8 查看接口状态</p>
-<p>do show standy br</p>
+              <p>ACL </p>
+<ol>
+<li><p>Access Control List</p>
+</li>
+<li><p>ACL��һ�ְ����˼�����</p>
+</li>
+<li><p>ACL����IP��ͷ��IP��ַ���Ĳ�TCP/UDPͷ���Ķ˿ںš�[5������]</p>
+<pre><code>����������Ĳ����</code></pre></li>
+<li><p>ACL��·���������ã�Ҳ�����ڷ���ǽ�����ã�һ���Ϊ���ԣ�</p>
+</li>
+<li><p>ACL��Ҫ��Ϊ2���ࣺ<br>1����׼ACL<br>2����չACL</p>
+</li>
+<li><p>��׼ACL��<br> ���ţ�1-99<br> �ص㣺ֻ�ܻ���ԴIP�԰����й���<br> ���<br> conf  t<br> access-list  ����  permit/deny   ԴIP��Դ����  ����������<br> ע�ͣ����������룺������������0��1����</p>
+<pre><code> 255.0.0.0  --  0.255.255.255
+ 255.255.0.0  --  0.0.255.255
+ 255.255.255.0  --  0.0.0.255
+�������������ã�����ƥ����������0��Ӧ����Ҫ�ϸ�ƥ�䣬��1��Ӧ�ĺ��ԣ�</code></pre><p> ���磺 access-list   1   deny   10.0.0.0   0.255.255.255</p>
+<pre><code>���ͣ�����Ŀ�����ܾ�����ԴIPΪ10��ͷ�ģ�
+
+          access-list   1   deny   10.1.1.1  0.0.0.0
+���ͣ�����Ŀ�����ܾ�����ԴIPΪ10.1.1.1������
+��д�� access-list   1   deny   host  10.1.1.1
+
+ access-list   1   deny   0.0.0.0  255.255.255.255
+���ͣ�����Ŀ�����ܾ�����������
+��д�� access-list   1   deny   any</code></pre></li>
+</ol>
+<p>�����İ�����<br>conf t<br>acc 1 deny host 10.1.1.1<br>acc 1 deny 20.1.1.0 0.0.0.255<br>acc 1 permit any</p>
+<p>�鿴ACL����<br>show  ip  access-list  [��ID]</p>
+<p>��ACLӦ�õ��ӿڣ�<br>int  f0/x<br>   ip  access-group  ����  in/out<br>   exit</p>
+<p>sh run</p>
+<p>7.��չACL��<br>    ���ţ�100-199<br>    �ص㣺���Ի���ԴIP��Ŀ��IP���˿ںš�Э��ȶ԰����й���<br>    ���<br>acc 100 permit/deny  Э��  ԴIP��Դ����  ����������  Ŀ��IP��Դ����  ����������  [eq �˿ں�]<br>ע�ͣ�Э�飺tcp/udp/icmp/ip</p>
+<p>������<br>acc 100 permit tcp host 10.1.1.1 host 20.1.1.3 eq 80<br>acc 100 permit icmp host 10.1.1.1 20.1.1.0 0.0.0.255<br>acc 100 deny ip host 10.1.1.1 20.1.1.0 0.0.0.255<br>acc 100 permit ip any any</p>
+<ol start="8">
+<li>ACLԭ��<br>1��ACL������Ӧ�õ��ӿڵĽ�����������Ч��<br>2��һ���ӿڵ�һ������ֻ��Ӧ��һ�ű���<br>3�������ǳ�����Ӧ�ã�ȡ�������������ܷ���<br>4��ACL�����ϸ����϶��¼��ÿһ��������Ҫ��Ҫ��д˳��<br>5��ÿһ�����������Ͷ�����ɣ���������ȫ����������ĳ����û������ĳ����������������һ��<br>6����׼ACL����д�ڿ���Ŀ��ĵط�<br>7��wencollСԭ����<br>  1�����������ƣ�����Ҫ���ж�ACLд��λ�ã��Ǹ�·�������Ǹ��ӿڵ��ĸ����򣿣�<br>  2���ٿ�����ôдACL��<br>  3�����д��<pre><code>����Ҫ�ж�����Ҫ�������л��Ǿܾ�����
+Ȼ��д��ʱ��Ҫע�⣺���ϸ�Ŀ���д��ǰ��</code></pre>8��һ������£���׼����չaclһ����д�ţ��޷��޸�ĳһ����Ҳ�޷�ɾ��ĳһ����Ҳ�޷��޸�˳��Ҳ�޷����м�����µ���Ŀ��ֻ��һֱ����������µ���Ŀ<br>  �����޸Ļ�����ɾ����ֻ��ɾ�����ű�������д��<br>  conf t<br>  no  access-list  ����</li>
+</ol>
+<p>9.����ACL��<br>  ���ã����ԶԱ�׼����չACL�����Զ�������<br>  �ŵ㣺�Զ������������ױ��ϣ�Ҳ���ڼ��䣡<br>            ���������޸�ĳһ������ɾ��ĳһ����Ҳ�������м����ĳһ��</p>
+<p>���<br>conf t<br>ip  access-list  standard/extended   �Զ������<br>      ��ʼ��deny��permit��дACL��Ŀ<br>      exit</p>
+<p>ɾ��ĳһ����<br>ip  access-list  standard/extended   �Զ������<br>      no  ��ĿID<br>      exit</p>
+<p>����ĳһ����<br>ip  access-list  standard/extended   �Զ������<br>      ��ĿID   ����   ����<br>      exit</p>
 
             </article>
             <hr>
@@ -260,7 +274,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+                      <a class="hover-with-bg" href="/categories/%EF%BF%BD%EF%BF%BD%EF%BF%BD%E7%B0%B2o/">���簲ȫ</a>
                     
                   </div>
                 
@@ -268,9 +282,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+                      <a class="hover-with-bg" href="/tags/%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD/">����</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
+                      <a class="hover-with-bg" href="/tags/%EF%BF%BD%EF%BF%BDo/">��ȫ</a>
                     
                   </div>
                 
@@ -283,9 +297,9 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/13/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day18/">
+                      <a href="/2020/08/14/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day19/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ACL</span>
+                        <span class="hidden-mobile">NAT</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -293,8 +307,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/08/01/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day16/">
-                        <span class="hidden-mobile">三层交换机</span>
+                      <a href="/2020/08/09/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day17/">
+                        <span class="hidden-mobile">HSRP热备份路由协议</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -461,7 +475,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "HSRP热备份路由协议&nbsp;",
+        "ACL&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

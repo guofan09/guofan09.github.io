@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>HSRP热备份路由协议 - 浮生一梦</title>
+  <title>编写Shell脚本 - 浮生一梦</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-09 00:00">
-      August 9, 2020 am
+    <time datetime="2020-08-26 00:00">
+      August 26, 2020 am
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      280 字
+      600 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      6
        分钟
     </span>
   
@@ -224,33 +224,41 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>HSRP协议（热备份路由协议）</p>
-<p>此协议作用：</p>
-<p>在网关接口失效情况下导致不能上网 快速启用备份网关   不用重新手动配置 无需重启设备</p>
-<p><img src="/wenzhang/Netmig/day1701.png" srcset="/img/loading.gif" alt=""></p>
-<p>给路由器配置热备份</p>
-<p>1.HSRP组号：1-255 没有大小之分</p>
-<p>int fx/x</p>
-<p>standby 1 ip 192.168.1.254(虚拟ip)</p>
-<p>2.虚拟路由器IP称为虚拟ip地址</p>
-<p>3.HSRP组的成员</p>
-<p>1）虚拟路由器（老大）</p>
-<p>2）活跃路由器</p>
-<p>3）备份路由器</p>
-<p>4）其他路由器</p>
-<p>4.HSRP优先级 1-255</p>
-<p>默认为100</p>
-<p>standby 1 priority 200</p>
-<p>5.HSRP 组员通过定时发送hello包来交流，默认每隔三秒</p>
-<p>hello时间三秒 坚持时间10秒</p>
-<p>6 占先权preempt</p>
-<p>当备份路由器 检测不到对方 收不到对方的消息， 或者检测到对放的优先级低于自己时</p>
-<p>就会立即抢占活跃的名分。</p>
-<p>standby 1 preempt</p>
-<p>7 配置跟踪track, 跟踪外网端口状态，当外网断掉时，则活跃路由自降优先级</p>
-<p>standby 1 track fx/x</p>
-<p>8 查看接口状态</p>
-<p>do show standy br</p>
+              <p>一 编写简单的脚本 </p>
+<p>二 接收用户的参数 </p>
+<p>三 判断用户参数</p>
+<pre><code class="hljs dockerfile">系统在执行 mkdir 命令时会判断用户输入的信息，即判断用户指定的文件夹名称是否已经存在，如果存在则提示报错；反之则自动创建。<span class="hljs-keyword">Shell</span><span class="bash"> 脚本中的条件测试语法可以判断表达式是否成立，若条件成立则返回数字 0，否则便返回其他随机数值。条件测试语法的执行格式如图所示。切记，条件表达式两边均应有一个空格。</span></code></pre>
+
+<p>-d 测试文件是否为目录类型</p>
+<p>-e 测试文件是否存在</p>
+<p>-f 判断是否为一般文件</p>
+<p>-r 测试当前用户是否有权限读取</p>
+<p>-w 测试当前用户是否有权限写入</p>
+<p>-x 测试当前用户是否有权限执行</p>
+<p>按照测试对象来划分 条件测试语句可以划分为4种</p>
+<p>1 文件测试语句“</p>
+<pre><code class="hljs ruby">使用文件测试语句来判断 /guoafan/gf.txt 是否为一个目录类型的文件，然后通过 Shell 解释器的内设$?变量显示上一条命令执行后的返回值。如果返回值为 <span class="hljs-number">0</span>，则目录存在；如果返回值为非零的值，则意味着目录不存在
+root@ubuntu<span class="hljs-symbol">:/</span><span class="hljs-comment"># [ -d /guofan/gf.txt ]</span>
+root@ubuntu<span class="hljs-symbol">:/</span><span class="hljs-comment"># echo $?</span>
+<span class="hljs-number">1</span>
+再使用文件测试语句来判断 /guoafan/gf.txt是否为一般文件，如果返回值为 <span class="hljs-number">0</span>，则代表文件存
+在，且为一般文件
+root@ubuntu<span class="hljs-symbol">:/</span><span class="hljs-comment"># [ -f /guoafan/gf.txt ]</span>
+root@ubuntu<span class="hljs-symbol">:/</span><span class="hljs-comment"># echo $?</span>
+<span class="hljs-number">1</span>
+逻辑语句用于对测试结果进行逻辑分析，根据测试结果可实现不同的效果
+在 Shell终端中逻辑“与”的运算符号是&amp;&amp;，它表示当前面的命令执行成功后才会执行它后面的命令，
+因此可以用来判断/dev/cdrom 文件是否存在，若存在则输出 Exist 字样。
+root@ubuntu<span class="hljs-symbol">:~</span><span class="hljs-comment"># [ -e guofan.txt ]&amp;&amp; echo exist</span>
+exist
+逻辑“或”，它在 Linux 系统中的运算符号为<span class="hljs-params">||</span>，表示当前面的命令执行失败后才会执行它后面的命令，因此可以用来结合系统环境变量 USER 来判断当前登录的用户是否为非管理员身份：
+[root@guofan ~]<span class="hljs-comment"># echo $USER </span>
+root 
+[root@guofan ~]<span class="hljs-comment"># [ $USER = root ] || echo "user" </span>
+[root@guofan ~]<span class="hljs-comment"># su - linuxprobe </span>
+[guofane@guofan ~]$ [ $USER = root ] <span class="hljs-params">||</span> echo <span class="hljs-string">"user"</span> 
+user</code></pre>
+
 
             </article>
             <hr>
@@ -260,7 +268,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
                     
                   </div>
                 
@@ -268,9 +276,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
+                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
                     
                   </div>
                 
@@ -283,9 +289,9 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/13/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day18/">
+                      <a href="/2020/08/28/linux04/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ACL</span>
+                        <span class="hidden-mobile">用户身份与文件权限</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -293,8 +299,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/08/01/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8day16/">
-                        <span class="hidden-mobile">三层交换机</span>
+                      <a href="/2020/08/21/linux02/">
+                        <span class="hidden-mobile">重定向</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -461,7 +467,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "HSRP热备份路由协议&nbsp;",
+        "编写Shell脚本&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
